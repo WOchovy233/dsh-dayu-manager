@@ -89,6 +89,9 @@ function Invoke-GitHub {
         $detail = $reader.ReadToEnd()
       } catch { $detail = '' }
     }
+    if ([string]::IsNullOrWhiteSpace($detail) -and $_.ErrorDetails) {
+      $detail = [string]$_.ErrorDetails.Message
+    }
     if ($AllowNotFound -and $status -eq 404) { return $null }
     # GitHub returns 409 for a valid repository that has no commits yet.
     if ($AllowUnborn -and $status -eq 409) { return $null }
@@ -114,7 +117,9 @@ if ($DryRun) {
 
 if (-not $PromptToken -and (Test-Path -LiteralPath $TokenFile)) {
   try {
-    $secure = Get-Content -Raw -LiteralPath $TokenFile | ConvertTo-SecureString
+    $stored = (Get-Content -Raw -LiteralPath $TokenFile).Trim()
+    if ($stored -eq '') { throw 'Saved token file is empty' }
+    $secure = $stored | ConvertTo-SecureString
     $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
     try { $script:Token = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr) }
     finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
@@ -129,13 +134,17 @@ if ([string]::IsNullOrWhiteSpace($script:Token)) {
   $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
   try { $script:Token = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr) }
   finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
+  $script:Token = $script:Token.Trim()
   if ([string]::IsNullOrWhiteSpace($script:Token)) { throw 'token is empty' }
   $encrypted = ConvertFrom-SecureString -SecureString $secure
-  Set-Content -LiteralPath $TokenFile -Value $encrypted -Encoding ascii
+  [System.IO.File]::WriteAllText($TokenFile, $encrypted, [System.Text.Encoding]::ASCII)
   Write-Host "Token encrypted for current Windows user: $TokenFile"
 }
 
-if ($script:Token -notmatch '^(ghp_|github_pat_|gho_|ghu_|ghs_)') { throw 'Token prefix does not look like a GitHub token' }
+$script:Token = $script:Token.Trim()
+if ($script:Token -notmatch '^(ghp_|github_pat_|gho_|ghu_|ghs_)') {
+  throw 'That does not look like a GitHub token. Copy only the ghp_... value shown after Generate token; do not paste an error message.'
+}
 
 $user = Invoke-GitHub -Method GET -Path '/user'
 if ($user.login -ne $Owner) { throw "Token belongs to $($user.login), not target owner $Owner" }
@@ -165,7 +174,7 @@ foreach ($file in $files) {
   $escapedPath = (($file.Relative -split '/') | ForEach-Object { [uri]::EscapeDataString($_) }) -join '/'
   $existing = $null
   if ($hasCommit) {
-    $existing = Invoke-GitHub -Method GET -Path "/repos/$Owner/$Repo/contents/$escapedPath?ref=$branch" -AllowNotFound
+    $existing = Invoke-GitHub -Method GET -Path "/repos/$Owner/$Repo/contents/${escapedPath}?ref=$branch" -AllowNotFound
     if ($existing -and $existing.sha -eq (Get-GitBlobSha $file.Bytes)) {
       Write-Host "  unchanged $($file.Relative)"
       continue
@@ -179,7 +188,23 @@ foreach ($file in $files) {
     $body.branch = $branch
     if ($existing -and $existing.sha) { $body.sha = $existing.sha }
   }
-  $null = Invoke-GitHub -Method PUT -Path "/repos/$Owner/$Repo/contents/$escapedPath" -Body $body
+  try {
+    $null = Invoke-GitHub -Method PUT -Path "/repos/$Owner/$Repo/contents/$escapedPath" -Body $body
+  } catch {
+    if ($hasCommit -and $_.Exception.Message -match '\(422\)') {
+      # A stale/missed contents read can omit the required sha. Re-read once
+      # and retry, which is safe for files that already exist remotely.
+      $again = Invoke-GitHub -Method GET -Path "/repos/$Owner/$Repo/contents/${escapedPath}?ref=$branch" -AllowNotFound
+      if ($again -and $again.sha) {
+        $body.sha = $again.sha
+        $null = Invoke-GitHub -Method PUT -Path "/repos/$Owner/$Repo/contents/$escapedPath" -Body $body
+      } else {
+        throw
+      }
+    } else {
+      throw
+    }
+  }
   Write-Host "  committed $($file.Relative)"
   $hasCommit = $true
 }
