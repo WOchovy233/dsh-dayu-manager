@@ -1,11 +1,1 @@
-# 大鱼管家 1.0.1
-
-## 修复
-
-- 品牌强调色不再继承 DSH 的黑色 primary token，面板按钮、分类标签和选中状态恢复为预览图中的蓝色。
-- 左侧栏「大鱼管家」图标改为固定蓝色小鱼，不再跟随侧栏文字颜色变成黑色。
-- 更新插件列表图标，使其与蓝色品牌视觉一致。
-
-## 说明
-
-DSH 自带的黑色鲸鱼 Logo、顶部品牌文字、系统按钮和开关属于 DSH 本体，不由大鱼管家控制，仍会保持 DSH 自己的主题样式。
+IyDlpKfpsbznrqHlrrYgMS4wLjINCg0KIyMg5L+u5aSNDQoNCi0g5Y+R5biD5rWB56iL5pS55Li65LiA5qyh5oCn5Yib5bu6IEdpdCB0cmVlIC8gY29tbWl077yM6YG/5YWN6YCQ5paH5Lu25pu05paw5pe255qEIDQyMiDplJnor6/vvIzkuZ/mmI7mmL7liqDlv6vlj5HluIPpgJ/luqbjgIINCi0g5Y+R5biD5LuT5bqT5LiN5YaN5YyF5ZCrIGBwdWJsaXNoLW5vdy5jbWRgIOWSjCBgcHVibGlzaC1ub3cucHMxYO+8jOi/meS4pOS4quaWh+S7tuS7heeUqOS6juacrOWcsOe7tOaKpOOAgg0KLSDkv53nlZkgMS4wLjEg55qE6JOd6Imy5ZOB54mM5L+u5aSN77ya6Z2i5p2/5by66LCD6Imy5ZKM5L6n6L655qCP5bCP6bG85Zu+5qCH5LiN5YaN57un5om/IERTSCDnmoTpu5HoibLkuLvoibLjgIINCg==

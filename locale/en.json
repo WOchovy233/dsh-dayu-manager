@@ -1,7 +1,1 @@
-{
-  "meta": {
-    "title": "Dayu Manager",
-    "description": "Adds Dayu Manager to the sidebar: a curated DSH plugin browser with a 30-second installation decision panel showing what a plugin does, which external hosts it reaches, and whether it writes files or runs commands. Opening the panel starts no audit and no model request. A local, read-only source audit costs 0 tokens; an optional AI explanation runs only on click, uses the current default model, and is cached per audit version. Installs use GitHub archives, so no local Git is required.",
-    "detail": "docs/DETAIL.md"
-  }
-}
+ew0KICAibWV0YSI6IHsNCiAgICAidGl0bGUiOiAiRGF5dSBNYW5hZ2VyIiwNCiAgICAiZGVzY3JpcHRpb24iOiAiQWRkcyBEYXl1IE1hbmFnZXIgdG8gdGhlIHNpZGViYXI6IGEgY3VyYXRlZCBEU0ggcGx1Z2luIGJyb3dzZXIgd2l0aCBhIDMwLXNlY29uZCBpbnN0YWxsYXRpb24gZGVjaXNpb24gcGFuZWwgc2hvd2luZyB3aGF0IGEgcGx1Z2luIGRvZXMsIHdoaWNoIGV4dGVybmFsIGhvc3RzIGl0IHJlYWNoZXMsIGFuZCB3aGV0aGVyIGl0IHdyaXRlcyBmaWxlcyBvciBydW5zIGNvbW1hbmRzLiBPcGVuaW5nIHRoZSBwYW5lbCBzdGFydHMgbm8gYXVkaXQgYW5kIG5vIG1vZGVsIHJlcXVlc3QuIEEgbG9jYWwsIHJlYWQtb25seSBzb3VyY2UgYXVkaXQgY29zdHMgMCB0b2tlbnM7IGFuIG9wdGlvbmFsIEFJIGV4cGxhbmF0aW9uIHJ1bnMgb25seSBvbiBjbGljaywgdXNlcyB0aGUgY3VycmVudCBkZWZhdWx0IG1vZGVsLCBhbmQgaXMgY2FjaGVkIHBlciBhdWRpdCB2ZXJzaW9uLiBJbnN0YWxscyB1c2UgR2l0SHViIGFyY2hpdmVzLCBzbyBubyBsb2NhbCBHaXQgaXMgcmVxdWlyZWQuIiwNCiAgICAiZGV0YWlsIjogImRvY3MvREVUQUlMLm1kIg0KICB9DQp9DQo=
