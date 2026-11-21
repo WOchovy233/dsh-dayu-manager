@@ -1,1 +1,7 @@
-ew0KICAibWV0YSI6IHsNCiAgICAidGl0bGUiOiAi5aSn6bG8566h5a62IiwNCiAgICAiZGVzY3JpcHRpb24iOiAi5Zyo5bem5L6n5qCP5paw5aKe44CM5aSn6bG8566h5a6244CN77ya57K+6YCJIERTSCDnpL7ljLrmj5Lku7bvvIzlj7Pkvqflronoo4XlhrPnrZbpnaLmnb/nlKggMzAg56eS6K6y5riF5a6D6IO95YGa5LuA5LmI44CB5Lya6K6/6Zeu5ZOq5Lqb5aSW6YOo5Z+f5ZCN44CB5Lya5LiN5Lya5YaZ5paH5Lu25oiW5omn6KGM5ZG95Luk44CC5omT5byA6Z2i5p2/5LiN5L2T5qOA44CB5LiN6LCD55So5qih5Z6L77yb54K544CM5byA5aeL5pys5Zyw5L2T5qOA44CN5omN5Y+q6K+75omr5o+P5rqQ56CB77yMMCBUb2tlbuOAguWPr+mAiSBBSSDop6Por7vku4XlnKjngrnlh7vml7bosIPnlKjlvZPliY3pu5jorqTmqKHlnovvvIzlubbmjInkvZPmo4DniYjmnKznvJPlrZjjgILlronoo4XotbAgR2l0SHViIOW9kuaho+WMhe+8jOaXoOmcgOacrOacuiBHaXTjgIIiLA0KICAgICJkZXRhaWwiOiAiZG9jcy9ERVRBSUwubWQiDQogIH0NCn0NCg==
+{
+  "meta": {
+    "title": "大鱼管家",
+    "description": "在左侧栏新增「大鱼管家」：精选 DSH 社区插件，右侧安装决策面板用 30 秒讲清它能做什么、会访问哪些外部域名、会不会写文件或执行命令。打开面板不体检、不调用模型；点「开始本地体检」才只读扫描源码，0 Token。可选 AI 解读仅在点击时调用当前默认模型，并按体检版本缓存。安装走 GitHub 归档包，无需本机 Git。",
+    "detail": "docs/DETAIL.md"
+  }
+}

@@ -1,1 +1,6 @@
-bm9kZV9tb2R1bGVzLwouZHNoLWRheXUtbWFuYWdlci5jcmVkCi5naC10b2tlbioKKi5sb2cKLkRTX1N0b3JlClRodW1icy5kYg==
+node_modules/
+.dsh-dayu-manager.cred
+.gh-token*
+*.log
+.DS_Store
+Thumbs.db

@@ -1,1 +1,3 @@
-LSBpbnNlcnQ6CiAgICAtIGlkOiBnaXRodWItZGlzY292ZXIKICAgICAgbmFtZTogZHNoLWdpdGh1Yi1kaXNjb3Zlcgo=
+- insert:
+    - id: github-discover
+      name: dsh-github-discover

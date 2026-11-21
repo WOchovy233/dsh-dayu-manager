@@ -1,1 +1,121 @@
-IyDlpKfpsbznrqHlrrbnu7TmiqTmiYvlhowNCg0K57uZ5o6l5omL55qEIGFnZW5077ya6L+Z5piv5LiA5Liq5bey5a6J6KOF5bm25q2j5Zyo6L+Q6KGM55qEIERTSCDmj5Lku7bjgILlhYjor7vlrozmnKzmlofku7blho3liqjmiYvjgIINCg0KIyMgMS4g5a6D5piv5LuA5LmIDQoNCuW3puS+p+agj+OAjOWkp+mxvOeuoeWutuOAje+8mueyvumAiSBHaXRIdWIg5LiK55qEIERTSCDnm7jlhbPmj5Lku7bvvIznlKjlj7Pkvqflronoo4XlhrPnrZbpnaLmnb/lsZXnpLrlip/og73jgIHlpJbpg6jnvZHnu5zjgIHmnKzlnLDlhpnlhaXjgIHlrZDov5vnqIvjgIHkvp3otZbkuI7nu7TmiqTnirbmgIHjgILmlK/mjIHmnKzlnLDpnZnmgIHkvZPmo4DjgIHlj6/pgIkgQUkg6Kej6K+75ZKM5LiA6ZSu5a6J6KOF44CCDQoNCi0g5YyF55uu5b2V77yaYDxyZXBvLXJvb3Q+YA0KLSDlrp7pmYUgcHJvZmlsZSDpk77mjqXvvJpgJVVTRVJQUk9GSUxFJVwuZHNoXHByb2ZpbGVzXGRlc2t0b3Bcbm9kZV9tb2R1bGVzXGRzaC1naXRodWItZGlzY292ZXJgIOaMh+WQkeWMheebruW9lQ0KLSDljIXlkI3vvJpgZHNoLWdpdGh1Yi1kaXNjb3ZlcmDvvIjmioDmnK8gaWQg5L+d55WZ77yM6YG/5YWN56C05Z2P5bey5a6J6KOFIHByb2ZpbGXvvIkNCi0gTG9hZGVyIOihjCBpZO+8mmBpbmNsdWRlOmdpdGh1Yi1kaXNjb3ZlcmANCi0g5b2T5YmNIHByb2ZpbGXvvJpgZGVza3RvcGANCi0g5a+55aSW5Lqn5ZOB5ZCN77yaYOWkp+mxvOeuoeWutmAgLyBgRGF5dSBNYW5hZ2VyYA0KDQojIyAyLiDmlofku7blnLDlm74NCg0KfCDmlofku7YgfCDogYzotKMgfA0KfC0tLXwtLS18DQp8IGBpbmRleC5qc2AgfCBIb3N0IOWNiui+ueOAgkhUVFAg6Lev55SxIGAvYXBpL2RzaC1naXRodWItZGlzY292ZXIvKmDvvJpgbGlzdGDjgIFgaW5zdGFsbGVkYOOAgWBpbnNwZWN0YOOAgWBpbnN0YWxsYOOAgWBhdWRpdGDjgIFgaW50ZXJwcmV0YOOAgWBhbGxg44CBYHNlYXJjaGDjgILlkKvlhoXlrZggKyDno4Hnm5jnvJPlrZjjgIHpmZDmtYHlpITnkIblkozmjInpnIAgQUkg6Kej6K+744CCIHwNCnwgYGF1ZGl0LmpzYCB8IOS9k+ajgOW8leaTju+8muS4i+i9vSBjb2RlbG9hZCDlvZLmoaMg4oaSIGd1bnppcCArIHRhciDop6PmnpAg4oaSIOmdmeaAgeaJq+aPj++8iOaooeWei+err+eCueOAgeeZu+W9leOAgeWGmeaWh+S7tuOAgeWtkOi/m+eoi+OAgea3t+a3huOAgWZvcmvjgIFucG0g5ZCM5ZCN5YyF77yJ4oaSIOi+k+WHuue7k+aehOWMluS6i+WunuS4juajgOafpemhueOAguS4jeS+nei1liBHaXRIdWIgQVBJIOmineW6puOAgiB8DQp8IGBjbGllbnQuanNgIHwg5rWP6KeI5Zmo5Y2K6L6555qE5YWo6YOoIFVJ77ya5a2X5YW444CBQ1NT44CB57K+6YCJ5YiX6KGo44CB5YiG57G744CB5pCc57Si44CB5Y+z5L6n5Yaz562W6Z2i5p2/44CB5L2T5qOA5bGV56S644CBQUkg6Kej6K+744CB5a6J6KOF56Gu6K6k44CCIHwNCnwgYGxvY2FsZS96aC5qc29uYOOAgWBsb2NhbGUvZW4uanNvbmAgfCDjgIzmj5Lku7bjgI3pobXmmL7npLrnmoTmoIfpopjkuI7mj4/ov7DvvIhgbWV0YS5kZXRhaWxgIOaMh+WQkSBgZG9jcy9ERVRBSUwubWRg77yJ44CCIHwNCnwgYGRvY3MvREVUQUlMLm1kYOOAgWBkb2NzL3ByZXZpZXcucG5nYCB8IOivpuaDhemhteivtOaYjuS4jueVjOmdoumihOiniOOAgiB8DQp8IGBSRUFETUUubWRg44CBYExJQ0VOU0VgIHwgR2l0SHViIOmmlumhteS4jiBNSVQg6K645Y+v6K+B44CCIHwNCnwgYFJFTEVBU0VfTk9URVMubWRgIHwg5Y+R5biD6ISa5pys6K+75Y+W55qE54mI5pys6K+05piO44CCIHwNCnwgYHB1Ymxpc2gtbm93LmNtZGDjgIFgcHVibGlzaC1ub3cucHMxYCB8IOS4gOmUruWPkeW4g+WIsCBHaXRIdWLvvJrkuIrkvKDmlofku7bjgIHliJvlu7ogdGFnIOS4jiByZWxlYXNl44CCIHwNCg0KIyMgMy4g5pWw5o2u5rWB5LiO57yT5a2YDQoNCi0g5Yid5qyh5omT5byA6Z2i5p2/5pe277yMSG9zdCDlubbooYzmo4DntKIgdXRpbGl0eSDkuI4gZ2FtZSDkuKTliJfvvIznu5PmnpzlkIjlubblkI7nlLHliY3nq6/liIbnsbvjgIINCi0g5LiJ5bGC57yT5a2Y77ya5YaF5a2YIGBjYWNoZWAgLyBgYWxsQ2FjaGVgIOKGkiBgJVRFTVAlXGRzaC1naXRodWItZGlzY292ZXItY2FjaGUuanNvbmAg4oaSIHN0YWxlLXdoaWxlLXJldmFsaWRhdGXjgIINCi0g5pif5pWw5b+r54Wn77yaYCVURU1QJVxkc2gtZ2l0aHViLWRpc2NvdmVyLXN0YXJzLmpzb25g44CCDQotIOS9k+ajgOe7k+aenO+8mui/m+eoi+WGhSBgYXVkaXRzYO+8jDYg5bCP5pe25oiW5LuT5bqTIHB1c2gg5Y+Y5YyW5ZCO6YeN5omr44CCDQotIEFJIOino+ivu++8mui/m+eoi+WGhSBgaW50ZXJwcmV0YXRpb25zYO+8jOaMieS7k+W6kyArIOS9k+ajgOaXtumXtCArIOivreiogOe8k+WtmO+8jOacgOWkmiA4MCDmnaHjgIINCi0g6ZmQ5rWB77ya5pyq55m75b2VIEdpdEh1YiDmkJzntKLnuqYgMTAg5qyhL+WIhumSn++8m+aguOW/gyBBUEkgNjAg5qyhL+Wwj+aXtuOAguaSnumZkOa1gei/lOWbniBgcmF0ZUxpbWl0ZWQgKyByZXNldEF0YOOAgg0KLSDmiZPlvIDpnaLmnb/kuI3kvZPmo4DjgIHkuI3osIPnlKjmqKHlnovjgILlj6rmnInnlKjmiLfngrnlh7vmiY3lj5HnlJ/mupDnoIHkuIvovb3miJbmqKHlnovor7fmsYLjgIINCg0KIyMgNC4g5pS55Yqo55qE5qCH5YeG5rWB56iLDQoNCjEuIOaUueaWh+S7tuOAglVJIOWPquaUuSBgY2xpZW50LmpzYO+8m0hvc3Qg6YC76L6R5pS5IGBpbmRleC5qc2AgLyBgYXVkaXQuanNg44CCDQoyLiDor63ms5Xmo4Dmn6XvvJoNCiAgIGBgYHBvd2Vyc2hlbGwNCiAgICRub2RlPSclRFNIX05PREUlJw0KICAgJiAkbm9kZSAtLWNoZWNrIDxyZXBvLXJvb3Q+L2luZGV4LmpzDQogICAmICRub2RlIC0tY2hlY2sgPHJlcG8tcm9vdD4vYXVkaXQuanMNCiAgICYgJG5vZGUgLS1jaGVjayA8cmVwby1yb290Pi9jbGllbnQuanMNCiAgIGBgYA0KMy4g6K6p5pS55Yqo55Sf5pWI77yaDQogICAtICoqSG9zdCDmlLnliqgqKu+8iGBpbmRleC5qc2AgLyBgYXVkaXQuanNg77yJ77ya5b+F6aG76YeN6L295o+S5Lu26KGM77yM5ZCm5YiZ5LuN5pen5Luj56CB44CCDQogICAtICoq55WM6Z2i5pS55YqoKirvvIhgY2xpZW50LmpzYO+8ie+8mumhtemdoiBgQ3RybCtSYOOAgg0KICAgLSBgbG9jYWxlLyouanNvbmDvvJrlj6rlvbHlk43jgIzmj5Lku7bjgI3pobXlsZXnpLrvvIzml6DpnIDph43ovb3jgIINCjQuIOmqjOivgeingeesrCA2IOiKguOAgg0KDQojIyA1LiDorr7orqHlhrPnrZYNCg0KLSAqKuWTgeeJjOiTneWbuuWumuS4uiBgIzNkNmZmMmAqKu+8mkRTSCDmtYXoibLkuLvpopjnmoQgYC0tZHN3LWFsaWFzLWJyYW5kLXByaW1hcnlgIOWunumZheaYr+m7keiJsu+8jOebtOaOpee7p+aJv+S8muiuqemdouadv+WPmOaIkOm7keeZve+8m+Wkp+mxvOeuoeWutuS/neeVmeiHquW3seeahOiTneiJsuWTgeeJjOOAgg0KLSAqKuWPs+S+p+WGs+etlumdouadvyoq77ya6YCJ5Lit5Y2h54mH5ZCO5Y6f5Zyw5p+l55yL77yM5LiN56a75byA5YiX6KGo77yM5LiN5omT5byA5paw6aG16Z2i44CCDQotICoq5LiN6Ieq5Yqo5L2T5qOAKirvvJrmiZPlvIDpnaLmnb/pm7bkuIvovb3jgIHpm7bmqKHlnovosIPnlKjjgILnlKjmiLfngrnjgIzlvIDlp4vmnKzlnLDkvZPmo4DjgI3miY3miavmj4/jgIINCi0gKirkuI3nlKjnuqLpu4Tnu7/nga/lgZrlronlhajmib/or7oqKu+8muaYvuekuuecn+WunuiDveWKm+WSjOajgOafpeaYjue7hu+8jOS9v+eUqOOAjDMwIOenkue7k+iuuuOAjeihqOi+vuOAgg0KLSAqKuacrOWcsOS8mOWFiCoq77ya5L2T5qOA5a6M5YWo5pys5Zyw77yMMCBUb2tlbu+8m0FJIOino+ivu+aYr+eLrOeri+OAgeWPr+mAieeahOesrOS6jOatpeOAgg0KLSAqKkFJIOWPquWPkeS6i+Wunioq77yaYC9pbnRlcnByZXRgIOWPquWPkemAgee7k+aehOWMluS9k+ajgOS6i+Wunu+8jOS4jeWPkemAgeaPkuS7tua6kOegge+8m+W/hemhu+eUseeUqOaIt+S4u+WKqOeCueWHu+OAgg0KLSAqKuWuieijhei1sCB0YXJiYWxsIOW9kuahoyoq77ya55So5oi35py65Zmo5rKh5pyJIEdpdO+8jGBwbHVnaW5NYW5hZ2VyLmluc3RhbGxCdW5kbGVgIOS9v+eUqCBHaXRIdWIgYXJjaGl2ZSB0YXIuZ3rjgIINCi0gKirkvZPmo4Dku47lvZLmoaPor7sgcGFja2FnZS5qc29uKirvvJrkuI3lho3kvp3otZYgR2l0SHViIGNvbnRlbnRzIEFQSe+8jOmBv+WFjemineW6puiAl+WwveWQjuivr+WIpOOAgg0KLSAqKuaKgOacr+WMheWQjeS/neaMgSBgZHNoLWdpdGh1Yi1kaXNjb3ZlcmAqKu+8muS6p+WTgeW3suaUueWQje+8jOS9huWGhemDqCBpZCDkuI3lj5jvvIzpgb/lhY3lt7Llronoo4UgcHJvZmlsZSDmlq3pk77jgIINCg0KIyMgNi4g6aqM6K+B5riF5Y2VDQoNCmBgYHBvd2Vyc2hlbGwNCiMgMSkg6K+t5rOVDQokbm9kZT0nJURTSF9OT0RFJScNCiYgJG5vZGUgLS1jaGVjayA8cmVwby1yb290Pi9pbmRleC5qcw0KJiAkbm9kZSAtLWNoZWNrIDxyZXBvLXJvb3Q+L2F1ZGl0LmpzDQomICRub2RlIC0tY2hlY2sgPHJlcG8tcm9vdD4vY2xpZW50LmpzDQoNCiMgMikg5Y+R5biD6ISa5pysIGRyeS1ydW4NCnBvd2Vyc2hlbGwgLU5vUHJvZmlsZSAtRXhlY3V0aW9uUG9saWN5IEJ5cGFzcyAtRmlsZSA8cmVwby1yb290Pi9wdWJsaXNoLW5vdy5wczEgLURyeVJ1bg0KYGBgDQoNCui/kOihjOaXtumqjOivge+8mg0KDQotIOOAjOWkp+mxvOeuoeWutuOAjeWHuueOsOWcqOW3puS+p+agj+OAgg0KLSDmiZPlvIDpnaLmnb/kuI3kuqfnlJ8gY29kZWxvYWQg5LiL6L2944CCDQotIOeCueWNoeeJh+WQjuWPs+S+p+aYvuekuuivpuaDhe+8m+eCueOAjOW8gOWni+acrOWcsOS9k+ajgOOAjeaJjeWPkei1t+aJq+aPj+OAgg0KLSDkvZPmo4DlkI4gMzAg56eS57uT6K6644CB5Zub6aG55oyH5qCH5LiO5qOA5p+l5piO57uG5q2j5bi45pi+56S644CCDQotIOOAjEFJIOino+ivu+OAjeaMiemSruWcqOS9k+ajgOWQjuWPr+eUqO+8m+acqumFjee9ruaooeWei+aXtue7meWHuua4heaZsOmUmeivr+OAgg0KLSDlronoo4XmjInpkq7lhYjmoLjlr7kgcGFja2FnZS5qc29u77yM5YaN5pi+56S656Gu6K6k5qCP44CCDQotIOaQnOe0ouaXoOe7k+aenOOAgUdpdEh1YiDpmZDmtYHjgIHkvZPmo4DlpLHotKXml7bpg73mnInlj6/or7vmj5DnpLrjgIINCg0KIyMgNy4g5bey55+l5Z2RDQoNCi0gKipjb2RlbG9hZCDlpKfku5PlupPlj6/og73lvojmhaIqKu+8mummluasoeS9k+ajgOWPr+iDvemcgOimgeetieW+heW9kuaho+S4i+i9veOAguWQjue7reS8mOWMluaWueWQkeaYr+WPquaKkyBgaW5kZXguanNgIC8gYGNsaWVudC5qc2AgLyBgcGFja2FnZS5qc29uYOOAgg0KLSAqKkdpdEh1YiDmkJzntKLotKjph4/kuI3nqLMqKu+8mmBpc0RzaFJlbGF0ZWQoKWAg6L+H5ruk5ZCN5a2X56Kw55O36aG555uu77yM5Yir5Yig44CCDQotICoq56uv5Y+j5q+P5qyh6YeN5ZCv6YO95Lya5Y+YKirvvJrlkb3ku6TooYzpqozor4HkuI3opoHlhpnmrbsgR1VJIFVSTOOAgg0KLSAqKkFJIOS+nei1luW9k+WJjem7mOiupOaooeWeiyoq77yaYGFnZW50RGVmYXVsdE1vZGVsLmN1cnJlbnRTZWxlY3Rpb24oKWAg5b+F6aG75pyJIHByb3ZpZGVyL21vZGVs77yb6Ieq5a6a5LmJ5Lit6L2s5LiN5Y+v55So5pe277yM6Kej6K+75Lya5aSx6LSl5L2G5pys5Zyw5L2T5qOA5LiN5Y+X5b2x5ZON44CCDQotICoq5Y+R5biD6ISa5pys5L2/55SoIFdpbmRvd3MgRFBBUEkg5L+d5a2YIHRva2VuKirvvJp0b2tlbiDmlofku7blnKjlvZPliY0gV2luZG93cyDnlKjmiLfkuIvlj6/op6Plr4bvvIzliKvlpI3liLbliLDliKvnmoTmnLrlmajmiJbmj5DkuqTliLDku5PlupPjgIINCi0gKirpppbmrKHlj5HluIPpnIDopoEgY2xhc3NpYyBQQVQg5LiU5Yu+6YCJIHJlcG8qKu+8muS5i+WQjiBgcHVibGlzaC1ub3cuY21kYCDlj6/kuIDplK7mm7TmlrDjgIINCg0KIyMgOC4g5Y+R5biDDQoNCmBgYHBvd2Vyc2hlbGwNCiMg6aaW5qyh77ya5Y+M5Ye7IHB1Ymxpc2gtbm93LmNtZO+8jOaMieaPkOekuueymOi0tOS4gOasoSB0b2tlbg0KIyDkuYvlkI7vvJrnu6fnu63lj4zlh7sgcHVibGlzaC1ub3cuY21kIOWNs+WPr+abtOaWsOS7o+eggeOAgXRhZyDlkowgcmVsZWFzZQ0KYGBgDQoNCuWPkeW4g+iEmuacrOS8mu+8mg0KDQoxLiDor7vlj5YgYHBhY2thZ2UuanNvbmAg55qE54mI5pys5Y+344CCDQoyLiDliJvlu7rmiJbmm7TmlrAgYFdPY2hvdnkyMzMvZHNoLWRheXUtbWFuYWdlcmDjgIINCjMuIOS4iuS8oOWPmOabtOaWh+S7tuOAgg0KNC4g5Yib5bu6IGB2MS4wLjBgIOW9ouW8j+eahCB0YWfjgIINCjUuIOWIm+W7uuaIluabtOaWsCBHaXRIdWIgUmVsZWFzZeOAgg0KNi4g5pu05paw5LuT5bqTIHRvcGljc+OAgg0KDQojIyA5LiDlvoXlip7lgJnpgIkNCg0KLSDkvZPmo4Dlj6rmipMgMyDkuKrlhbPplK7mlofku7bvvIznvKnnn63lpKfku5PlupPnrYnlvoXml7bpl7TjgIINCi0g5Ya35ZCv5Yqo5qOA57Si5LuOIDYg5qyh6ZmN5YiwIDQg5qyh44CCDQotIOWIhuexu+agh+etvuWHhuehrueOh+W+ruiwg++8iOaUuSBgY2F0ZWdvcml6ZSgpYCDmraPliJnvvInjgIINCi0g5L2T5qOA57uT5p6c6JC955uY44CCDQotIOW3suWuieijheaPkuS7tuWNh+e6p+ajgOafpeWSjOeuoeeQhuWFpeWPo+OAgg==
+# 大鱼管家维护手册
+
+给接手的 agent：这是一个已安装并正在运行的 DSH 插件。先读完本文件再动手。
+
+## 1. 它是什么
+
+左侧栏「大鱼管家」：精选 GitHub 上的 DSH 相关插件，用右侧安装决策面板展示功能、外部网络、本地写入、子进程、依赖与维护状态。支持本地静态体检、可选 AI 解读和一键安装。
+
+- 包目录：`<repo-root>`
+- 实际 profile 链接：`%USERPROFILE%\.dsh\profiles\desktop\node_modules\dsh-github-discover` 指向包目录
+- 包名：`dsh-github-discover`（技术 id 保留，避免破坏已安装 profile）
+- Loader 行 id：`include:github-discover`
+- 当前 profile：`desktop`
+- 对外产品名：`大鱼管家` / `Dayu Manager`
+
+## 2. 文件地图
+
+| 文件 | 职责 |
+|---|---|
+| `index.js` | Host 半边。HTTP 路由 `/api/dsh-github-discover/*`：`list`、`installed`、`inspect`、`install`、`audit`、`interpret`、`all`、`search`。含内存 + 磁盘缓存、限流处理和按需 AI 解读。 |
+| `audit.js` | 体检引擎：下载 codeload 归档 → gunzip + tar 解析 → 静态扫描（模型端点、登录、写文件、子进程、混淆、fork、npm 同名包）→ 输出结构化事实与检查项。不依赖 GitHub API 额度。 |
+| `client.js` | 浏览器半边的全部 UI：字典、CSS、精选列表、分类、搜索、右侧决策面板、体检展示、AI 解读、安装确认。 |
+| `locale/zh.json`、`locale/en.json` | 「插件」页显示的标题与描述（`meta.detail` 指向 `docs/DETAIL.md`）。 |
+| `docs/DETAIL.md`、`docs/preview.png` | 详情页说明与界面预览。 |
+| `README.md`、`LICENSE` | GitHub 首页与 MIT 许可证。 |
+| `RELEASE_NOTES.md` | 发布脚本读取的版本说明。 |
+| `publish-now.cmd`、`publish-now.ps1` | 一键发布到 GitHub：上传文件、创建 tag 与 release。 |
+
+## 3. 数据流与缓存
+
+- 初次打开面板时，Host 并行检索 utility 与 game 两列，结果合并后由前端分类。
+- 三层缓存：内存 `cache` / `allCache` → `%TEMP%\dsh-github-discover-cache.json` → stale-while-revalidate。
+- 星数快照：`%TEMP%\dsh-github-discover-stars.json`。
+- 体检结果：进程内 `audits`，6 小时或仓库 push 变化后重扫。
+- AI 解读：进程内 `interpretations`，按仓库 + 体检时间 + 语言缓存，最多 80 条。
+- 限流：未登录 GitHub 搜索约 10 次/分钟；核心 API 60 次/小时。撞限流返回 `rateLimited + resetAt`。
+- 打开面板不体检、不调用模型。只有用户点击才发生源码下载或模型请求。
+
+## 4. 改动的标准流程
+
+1. 改文件。UI 只改 `client.js`；Host 逻辑改 `index.js` / `audit.js`。
+2. 语法检查：
+   ```powershell
+   $node='%DSH_NODE%'
+   & $node --check <repo-root>/index.js
+   & $node --check <repo-root>/audit.js
+   & $node --check <repo-root>/client.js
+   ```
+3. 让改动生效：
+   - **Host 改动**（`index.js` / `audit.js`）：必须重载插件行，否则仍旧代码。
+   - **界面改动**（`client.js`）：页面 `Ctrl+R`。
+   - `locale/*.json`：只影响「插件」页展示，无需重载。
+4. 验证见第 6 节。
+
+## 5. 设计决策
+
+- **品牌蓝固定为 `#3d6ff2`**：DSH 浅色主题的 `--dsw-alias-brand-primary` 实际是黑色，直接继承会让面板变成黑白；大鱼管家保留自己的蓝色品牌。
+- **右侧决策面板**：选中卡片后原地查看，不离开列表，不打开新页面。
+- **不自动体检**：打开面板零下载、零模型调用。用户点「开始本地体检」才扫描。
+- **不用红黄绿灯做安全承诺**：显示真实能力和检查明细，使用「30 秒结论」表达。
+- **本地优先**：体检完全本地，0 Token；AI 解读是独立、可选的第二步。
+- **AI 只发事实**：`/interpret` 只发送结构化体检事实，不发送插件源码；必须由用户主动点击。
+- **安装走 tarball 归档**：用户机器没有 Git，`pluginManager.installBundle` 使用 GitHub archive tar.gz。
+- **体检从归档读 package.json**：不再依赖 GitHub contents API，避免额度耗尽后误判。
+- **技术包名保持 `dsh-github-discover`**：产品已改名，但内部 id 不变，避免已安装 profile 断链。
+
+## 6. 验证清单
+
+```powershell
+# 1) 语法
+$node='%DSH_NODE%'
+& $node --check <repo-root>/index.js
+& $node --check <repo-root>/audit.js
+& $node --check <repo-root>/client.js
+
+# 2) 发布脚本 dry-run
+powershell -NoProfile -ExecutionPolicy Bypass -File <repo-root>/publish-now.ps1 -DryRun
+```
+
+运行时验证：
+
+- 「大鱼管家」出现在左侧栏。
+- 打开面板不产生 codeload 下载。
+- 点卡片后右侧显示详情；点「开始本地体检」才发起扫描。
+- 体检后 30 秒结论、四项指标与检查明细正常显示。
+- 「AI 解读」按钮在体检后可用；未配置模型时给出清晰错误。
+- 安装按钮先核对 package.json，再显示确认栏。
+- 搜索无结果、GitHub 限流、体检失败时都有可读提示。
+
+## 7. 已知坑
+
+- **codeload 大仓库可能很慢**：首次体检可能需要等待归档下载。后续优化方向是只抓 `index.js` / `client.js` / `package.json`。
+- **GitHub 搜索质量不稳**：`isDshRelated()` 过滤名字碰瓷项目，别删。
+- **端口每次重启都会变**：命令行验证不要写死 GUI URL。
+- **AI 依赖当前默认模型**：`agentDefaultModel.currentSelection()` 必须有 provider/model；自定义中转不可用时，解读会失败但本地体检不受影响。
+- **发布脚本使用 Windows DPAPI 保存 token**：token 文件在当前 Windows 用户下可解密，别复制到别的机器或提交到仓库。
+- **首次发布需要 classic PAT 且勾选 repo**：之后 `publish-now.cmd` 可一键更新。
+
+## 8. 发布
+
+```powershell
+# 首次：双击 publish-now.cmd，按提示粘贴一次 token
+# 之后：继续双击 publish-now.cmd 即可更新代码、tag 和 release
+```
+
+发布脚本会：
+
+1. 读取 `package.json` 的版本号。
+2. 创建或更新 `WOchovy233/dsh-dayu-manager`。
+3. 上传变更文件。
+4. 创建 `v1.0.0` 形式的 tag。
+5. 创建或更新 GitHub Release。
+6. 更新仓库 topics。
+
+## 9. 待办候选
+
+- 体检只抓 3 个关键文件，缩短大仓库等待时间。
+- 冷启动检索从 6 次降到 4 次。
+- 分类标签准确率微调（改 `categorize()` 正则）。
+- 体检结果落盘。
+- 已安装插件升级检查和管理入口。

@@ -1,1 +1,100 @@
-IyDlpKfpsbznrqHlrrYKCj4g5a6J6KOF5LmL5YmN77yM5YWI55yL5riF5a6D6IO95YGa5LuA5LmI44CB5Lya5Yqo5LuA5LmI44CCCgrlpKfpsbznrqHlrrbmmK/kuIDkuKrpnaLlkJEgRFNIIOeahOaPkuS7tuWPkeeOsOS4juWuieijheWGs+etlumdouadv+OAguWug+aKiuekvuWMuuaPkuS7tuaVtOeQhuaIkOWPr+a1j+iniOeahOWNoeeJh++8jOW5tuWcqOWuieijheWJjeeUqOS4gOS7veacrOWcsOmdmeaAgeS9k+ajgOaKpeWRiu+8jOW4ruS9oOWcqCAzMCDnp5LlhoXliKTmlq3vvJrov5nkuKrmj5Lku7blgLzkuI3lgLzlvpfoo4XjgIHkvJrluKbmnaXlk6rkupvog73lipvjgIHmnInmsqHmnInpnIDopoHnibnliKvnlZnmhI/nmoTooYzkuLrjgIIKCiFb5aSn6bG8566h5a6255WM6Z2i6aKE6KeIXShkb2NzL3ByZXZpZXcucG5nKQoKIyMg5a6D6IO95YGa5LuA5LmICgojIyMg57K+6YCJ5o+S5Lu277yM6ICM5LiN5piv5pCc57Si57uT5p6c5aCGCgotIOaMieW8gOWPkeW3peWFt+OAgeaooeWei+iDveWKm+OAgeeVjOmdoue+juWMluOAgeWGheWuueWIm+S9nOOAgea4uOaIj+W8gOWPkeetieaWueWQkea1j+iniOOAggotIOaUr+aMgeWFs+mUruivjeaQnOe0ouOAgUdpdEh1YiDku6TniYzmj5Dpq5jmo4DntKLpopHnjofjgIIKLSDmmL7npLrkvZzogIXjgIHnroDku4vjgIHor53popjjgIFTdGFycyDlkozmnIDov5Hmm7TmlrDml7bpl7TjgIIKLSDlt7Llronoo4Xmj5Lku7bkvJrooqvmoIforrDvvIzpgb/lhY3ph43lpI3lronoo4XjgIIKCiMjIyAzMCDnp5Llronoo4XlhrPnrZYKCumAieS4reS4gOS4quaPkuS7tuWQju+8jOWPs+S+p+S8mumbhuS4reWxleekuu+8mgoKLSDlroPmmK/lgZrku4DkuYjnmoQKLSDkvJrorr/pl67lk6rkupvlpJbpg6jln5/lkI0KLSDkvJrkuI3kvJrlhpnlhaXmnKzlnLDmlofku7bjgIHlhpnliLDku4DkuYjojIPlm7QKLSDkvJrkuI3kvJrlkK/liqjlrZDov5vnqIvmiJbmiafooYzlkb3ku6QKLSDmmK/lkKbpnIDopoHnmbvlvZXmiJbloavlhpkgS2V5Ci0g6L+Q6KGM5pe25L6d6LWW5pWw6YePCi0g5pyA6L+R5pu05paw5pe26Ze044CB5YiG5pSv5ZKMIFN0YXJzCi0g5a6M5pW06Z2Z5oCB5qOA5p+l5piO57uGCgrnu5Porrrkvb/nlKjmma7pgJror63oqIDooajovr7vvIzkuI3kvb/nlKjnuqLpu4Tnu7/nga/kvZzkuLrlronlhajmib/or7rjgIIKCiMjIyDmnKzlnLDkvZPmo4DvvIwwIFRva2VuCgrmiZPlvIDpnaLmnb/kuI3kvJroh6rliqjkvZPmo4DvvIzkuZ/kuI3kvJrosIPnlKjmqKHlnovjgIIKCuWPquacieeCueWHu+OAjOW8gOWni+acrOWcsOS9k+ajgOOAjeWQju+8jOWuv+S4u+aJjeS8muWPquivu+S4i+i9veW5tuaJq+aPj+aPkuS7tua6kOeggeOAguS9k+ajgOS4jeS8mui/kOihjOaPkuS7tu+8jOS5n+S4jea2iOiAl+aooeWeiyBUb2tlbuOAguaJq+aPj+WGheWuueWMheaLrO+8mgoKLSDmqKHlnovmjqXlj6PkuI7lpJbpg6jln5/lkI0KLSDnmbvlvZXjgIHlh63mja7kuI4gS2V5IOebuOWFs+S7o+eggQotIOacrOWcsOaWh+S7tuWGmeWFpeS4juezu+e7n+i3r+W+hOWGmeWFpQotIOWtkOi/m+eoi+OAgVNoZWxsIOiwg+eUqAotIOWKqOaAgeaJp+ihjOOAgea3t+a3huS4jui2hemVv+e8lueggei9veiNtwotIGZvcmsg54q25oCB44CB5YyF5p2l5rqQ5LiOIG5wbSDlkIzlkI3ljIXmg4XlhrUKCiMjIyDlj6/pgInnmoQgQUkg6Kej6K+7CgrlpoLmnpzkvZPmo4DmiqXlkYror7votbfmnaXku43nhLbotLnlirLvvIzlj6/ku6Xngrnlh7vjgIxBSSDop6Por7vjgI3jgIIKCi0g5Y+q5pyJ54K55Ye75pe25omN6LCD55So5qih5Z6LCi0g5L2/55So5L2g5b2T5YmNIERTSCDphY3nva7nmoTpu5jorqTmqKHlnovlkozpop3luqYKLSDlj6rlj5HpgIHnu5PmnoTljJbkvZPmo4Dkuovlrp7vvIzkuI3lj5HpgIHmj5Lku7bmupDnoIEKLSDnu5PmnpzmjInmj5Lku7bkuI7kvZPmo4DniYjmnKznvJPlrZjvvIzph43lpI3mn6XnnIvkuI3kvJrph43lpI3osIPnlKgKCiMjIOWuieijhQoKMS4g5omT5byAIERTSCDnmoTmj5Lku7bpobXpnaLjgIIKMi4g6YCJ5oup5LuOIEdpdEh1YiDlronoo4Xmj5Lku7bjgIIKMy4g5aGr5YWl5pys5LuT5bqT5Zyw5Z2A77yaYGh0dHBzOi8vZ2l0aHViLmNvbS9XT2Nob3Z5MjMzL2RzaC1kYXl1LW1hbmFnZXJgCjQuIOaMiSBEU0gg5o+Q56S65ZCv55So5o+S5Lu25bm25Yi35paw55WM6Z2i44CCCgrlronoo4Xmj5Lku7bkuI3pnIDopoHmnKzmnLrlronoo4UgR2l044CC5o+S5Lu25Lya5LuOIEdpdEh1YiDnmoTlvZLmoaPljIXlronoo4XjgIIKCiMjIOmakOengeS4jui+ueeVjAoKLSDkuI3ljIXlkKvpgaXmtYvvvIzkuI3mlLbpm4bkvb/nlKjmlbDmja7jgIIKLSBHaXRIdWIg5Luk54mM5Y+q5L+d5a2Y5Zyo5pys5py65rWP6KeI5Zmo77yM5LuF55So5LqO5o+Q6auYIEdpdEh1YiBBUEkg6aKR546H5LiK6ZmQ44CCCi0g5pys5Zyw5L2T5qOA5LiN5LiK5Lyg5rqQ56CB44CCCi0gQUkg6Kej6K+75Y+q5Y+R6YCB5L2T5qOA5LqL5a6e77yM5LiU5b+F6aG755Sx5L2g5Li75Yqo54K55Ye744CCCi0g6Z2Z5oCB5L2T5qOA5piv5ZCv5Y+R5byP5Yik5pat77yM5LiN6IO95pu/5Luj6ZqU56a76L+Q6KGM77yM5Lmf5LiN5p6E5oiQ5a6J5YWo5ouF5L+d44CCCi0g56ys5LiJ5pa55o+S5Lu25LiOIERTSCDmi6XmnInlkIznrYnmnYPpmZDvvIzor7flj6rlronoo4XkvaDkv6Hku7vnmoTpobnnm67jgIIKCiMjIOS9v+eUqOmZkOWItgoKLSDpnIDopoHog73lpJ/orr/pl64gYGFwaS5naXRodWIuY29tYOOAgWBjb2RlbG9hZC5naXRodWIuY29tYCDkuI4gYHJhdy5naXRodWJ1c2VyY29udGVudC5jb21g44CCCi0g5pyq55m75b2V55qEIEdpdEh1YiDmkJzntKLmnInpopHnjofpmZDliLbvvIzlj6/lnKjpnaLmnb/kuK3loavlhaXku6TniYzmj5Dpq5jkuIrpmZDjgIIKLSDlj6rmnInlo7DmmI7kuoYgRFNIIOaPkuS7tua4heWNleeahOS7k+W6k+aJjeiDveiiq+ato+ehruWuieijheOAggotIOWkp+Wei+S7k+W6k+eahOmmluasoeS9k+ajgOWPr+iDvemcgOimgeetieW+hea6kOeggeW9kuaho+S4i+i9veWujOaIkOOAggoKIyMg5byA5Y+RCgpgYGB0ZXh0CmluZGV4LmpzICAgIEhvc3Qg6Lev55Sx44CBR2l0SHViIOajgOe0ouOAgeWuieijheS4jiBBSSDop6Por7sKYXVkaXQuanMgICAg5rqQ56CB5b2S5qGj6Kej5p6Q5LiO6Z2Z5oCB5L2T5qOA5byV5pOOCmNsaWVudC5qcyAgIOa1j+iniOWZqOmdouadv++8muWIl+ihqOOAgeaQnOe0ouOAgeWuieijheWGs+etluS4juS9k+ajgOWxleekugpsb2NhbGUvICAgICDmj5Lku7bpobXpnaLmoIfpopjkuI7mj4/ov7AKZG9jcy8gICAgICAg6K+m5oOF6aG15LiO6aKE6KeI5Zu+CmBgYAoK6K+t5rOV5qOA5p+l77yaCgpgYGBwb3dlcnNoZWxsCm5vZGUgLS1jaGVjayBpbmRleC5qcwpub2RlIC0tY2hlY2sgYXVkaXQuanMKbm9kZSAtLWNoZWNrIGNsaWVudC5qcwpgYGAKCiMjIExpY2Vuc2UKCk1JVA==
+# 大鱼管家
+
+> 安装之前，先看清它能做什么、会动什么。
+
+大鱼管家是一个面向 DSH 的插件发现与安装决策面板。它把社区插件整理成可浏览的卡片，并在安装前用一份本地静态体检报告，帮你在 30 秒内判断：这个插件值不值得装、会带来哪些能力、有没有需要特别留意的行为。
+
+![大鱼管家界面预览](docs/preview.png)
+
+## 它能做什么
+
+### 精选插件，而不是搜索结果堆
+
+- 按开发工具、模型能力、界面美化、内容创作、游戏开发等方向浏览。
+- 支持关键词搜索、GitHub 令牌提高检索频率。
+- 显示作者、简介、话题、Stars 和最近更新时间。
+- 已安装插件会被标记，避免重复安装。
+
+### 30 秒安装决策
+
+选中一个插件后，右侧会集中展示：
+
+- 它是做什么的
+- 会访问哪些外部域名
+- 会不会写入本地文件、写到什么范围
+- 会不会启动子进程或执行命令
+- 是否需要登录或填写 Key
+- 运行时依赖数量
+- 最近更新时间、分支和 Stars
+- 完整静态检查明细
+
+结论使用普通语言表达，不使用红黄绿灯作为安全承诺。
+
+### 本地体检，0 Token
+
+打开面板不会自动体检，也不会调用模型。
+
+只有点击「开始本地体检」后，宿主才会只读下载并扫描插件源码。体检不会运行插件，也不消耗模型 Token。扫描内容包括：
+
+- 模型接口与外部域名
+- 登录、凭据与 Key 相关代码
+- 本地文件写入与系统路径写入
+- 子进程、Shell 调用
+- 动态执行、混淆与超长编码载荷
+- fork 状态、包来源与 npm 同名包情况
+
+### 可选的 AI 解读
+
+如果体检报告读起来仍然费劲，可以点击「AI 解读」。
+
+- 只有点击时才调用模型
+- 使用你当前 DSH 配置的默认模型和额度
+- 只发送结构化体检事实，不发送插件源码
+- 结果按插件与体检版本缓存，重复查看不会重复调用
+
+## 安装
+
+1. 打开 DSH 的插件页面。
+2. 选择从 GitHub 安装插件。
+3. 填入本仓库地址：`https://github.com/WOchovy233/dsh-dayu-manager`
+4. 按 DSH 提示启用插件并刷新界面。
+
+安装插件不需要本机安装 Git。插件会从 GitHub 的归档包安装。
+
+## 隐私与边界
+
+- 不包含遥测，不收集使用数据。
+- GitHub 令牌只保存在本机浏览器，仅用于提高 GitHub API 频率上限。
+- 本地体检不上传源码。
+- AI 解读只发送体检事实，且必须由你主动点击。
+- 静态体检是启发式判断，不能替代隔离运行，也不构成安全担保。
+- 第三方插件与 DSH 拥有同等权限，请只安装你信任的项目。
+
+## 使用限制
+
+- 需要能够访问 `api.github.com`、`codeload.github.com` 与 `raw.githubusercontent.com`。
+- 未登录的 GitHub 搜索有频率限制，可在面板中填入令牌提高上限。
+- 只有声明了 DSH 插件清单的仓库才能被正确安装。
+- 大型仓库的首次体检可能需要等待源码归档下载完成。
+
+## 开发
+
+```text
+index.js    Host 路由、GitHub 检索、安装与 AI 解读
+audit.js    源码归档解析与静态体检引擎
+client.js   浏览器面板：列表、搜索、安装决策与体检展示
+locale/     插件页面标题与描述
+docs/       详情页与预览图
+```
+
+语法检查：
+
+```powershell
+node --check index.js
+node --check audit.js
+node --check client.js
+```
+
+## License
+
+MIT

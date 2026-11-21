@@ -1,1 +1,5 @@
-IVvlpKfpsbznrqHlrrbvvJrlt6bkvqfmmK/nsr7pgInmj5Lku7bljaHniYfvvIzlj7PkvqfmmK8gMzAg56eS5a6J6KOF5Yaz562W6Z2i5p2/XShwcmV2aWV3LnBuZykKCuWkp+mxvOeuoeWutuaKiuaPkuS7tuWPkeeOsOWSjOWuieijheWJjeeahOWIpOaWreaUvuWcqOWQjOS4gOS4queVjOmdoumHjO+8muW3puS+p+a1j+iniOekvuWMuuaPkuS7tu+8jOWPs+S+p+afpeeci+WKn+iDveOAgeWklumDqOe9kee7nOOAgeacrOWcsOWGmeWFpeOAgeWtkOi/m+eoi+OAgeS+nei1luS4jue7tOaKpOeKtuaAgeOAguaJk+W8gOmdouadv+S4jeS8muiHquWKqOS9k+ajgO+8jOS5n+S4jeS8muiwg+eUqOaooeWei+OAggoK54K544CM5byA5aeL5pys5Zyw5L2T5qOA44CN5ZCO77yM5a6/5Li75Lya5Y+q6K+75LiL6L295bm25omr5o+P5rqQ56CB77yM55Sf5oiQ5pys5Zyw5oql5ZGK77yIMCBUb2tlbu+8ieOAgumcgOimgeabtOmAmuS/l+eahOino+mHiuaXtu+8jOWPr+S7peWGjeeCueOAjEFJIOino+ivu+OAje+8m+i/meS4gOaTjeS9nOWPquWcqOeCueWHu+aXtuiwg+eUqOW9k+WJjem7mOiupOaooeWei++8jOW5tuaMieS9k+ajgOeJiOacrOe8k+WtmOOAgg==
+![大鱼管家：左侧是精选插件卡片，右侧是 30 秒安装决策面板](preview.png)
+
+大鱼管家把插件发现和安装前的判断放在同一个界面里：左侧浏览社区插件，右侧查看功能、外部网络、本地写入、子进程、依赖与维护状态。打开面板不会自动体检，也不会调用模型。
+
+点「开始本地体检」后，宿主会只读下载并扫描源码，生成本地报告（0 Token）。需要更通俗的解释时，可以再点「AI 解读」；这一操作只在点击时调用当前默认模型，并按体检版本缓存。

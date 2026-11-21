@@ -1,1 +1,8 @@
-IyDlpKfpsbznrqHlrrYgMS4wLjINCg0KIyMg5L+u5aSNDQoNCi0g5Y+R5biD5rWB56iL5pS55Li65LiA5qyh5oCn5Yib5bu6IEdpdCB0cmVlIC8gY29tbWl077yM6YG/5YWN6YCQ5paH5Lu25pu05paw5pe255qEIDQyMiDplJnor6/vvIzkuZ/mmI7mmL7liqDlv6vlj5HluIPpgJ/luqbjgIINCi0g5Y+R5biD5LuT5bqT5LiN5YaN5YyF5ZCrIGBwdWJsaXNoLW5vdy5jbWRgIOWSjCBgcHVibGlzaC1ub3cucHMxYO+8jOi/meS4pOS4quaWh+S7tuS7heeUqOS6juacrOWcsOe7tOaKpOOAgg0KLSDkv53nlZkgMS4wLjEg55qE6JOd6Imy5ZOB54mM5L+u5aSN77ya6Z2i5p2/5by66LCD6Imy5ZKM5L6n6L655qCP5bCP6bG85Zu+5qCH5LiN5YaN57un5om/IERTSCDnmoTpu5HoibLkuLvoibLjgIINCg==
+# 大鱼管家 1.0.3
+
+## 修复
+
+- 修正发布流程的文件编码：改用 Git blob API 逐个上传，避免源码被当作 base64 文本写入仓库。
+- 发布改为单次 tree / commit，避免逐文件更新时的 422 错误。
+- 发布仓库不再包含内部发布脚本。
+- 保留 1.0.1 的蓝色品牌修复：面板强调色和侧边栏小鱼图标不再继承 DSH 的黑色主色。
