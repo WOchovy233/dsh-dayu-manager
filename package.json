@@ -1,0 +1,50 @@
+{
+  "name": "dsh-github-discover",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "大鱼管家：DSH 插件发现、安装决策与本地静态体检。",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "audit.js",
+    "client.js",
+    "cordis.patch.yml",
+    "MAINTENANCE.md",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "plugin-discovery",
+    "security-audit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WOchovy233/dsh-dayu-manager.git"
+  },
+  "homepage": "https://github.com/WOchovy233/dsh-dayu-manager#readme",
+  "bugs": {
+    "url": "https://github.com/WOchovy233/dsh-dayu-manager/issues"
+  }
+}
