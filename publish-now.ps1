@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
 $UA = 'dsh-dayu-manager-publisher'
 $api = 'https://api.github.com'
 
