@@ -1,6 +1,6 @@
 {
   "name": "dsh-github-discover",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "大鱼管家：DSH 插件发现、安装决策与本地静态体检。",
