@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Dayu Manager",
+    "description": "Adds Dayu Manager to the sidebar: a curated DSH plugin browser with a 30-second installation decision panel showing what a plugin does, which external hosts it reaches, and whether it writes files or runs commands. Opening the panel starts no audit and no model request. A local, read-only source audit costs 0 tokens; an optional AI explanation runs only on click, uses the current default model, and is cached per audit version. Installs use GitHub archives, so no local Git is required.",
+    "detail": "docs/DETAIL.md"
+  }
+}
