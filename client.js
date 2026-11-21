@@ -364,12 +364,16 @@ window.__ModuleLoader__.load({
       const size = typeof props.size === 'number' ? props.size : 18
       return h('svg', {
         width: size, height: size, viewBox: '0 0 24 24', fill: 'none',
-        stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round',
+        stroke: '#3d6ff2', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round',
         'aria-hidden': 'true',
       }, [
-        h('path', { key: 'shield', d: 'M12 2.4 20 5.6v5.5c0 4.7-3.3 8.3-8 10.5-4.7-2.2-8-5.8-8-10.5V5.6L12 2.4Z' }),
-        h('path', { key: 'wave', d: 'M7 12c1.7-2.1 3.4-2.1 5 0s3.3 2.1 5 0' }),
-        h('circle', { key: 'eye', cx: 8.4, cy: 9.5, r: 0.8, fill: 'currentColor', stroke: 'none' }),
+        h('path', {
+          key: 'fish',
+          d: 'M3.5 12.1c3.1-4.3 7.7-5.2 11.7-2.9L20 6.4v11.2l-4.7-2.8c-4 2.3-8.7 1.4-11.8-2.7Z',
+          fill: '#3d6ff2', fillOpacity: .16,
+        }),
+        h('circle', { key: 'eye', cx: 8.7, cy: 10.8, r: .85, fill: '#3d6ff2', stroke: 'none' }),
+        h('path', { key: 'gill', d: 'M14.1 8.6c1.1 1 1.1 3.9 0 4.9' }),
       ])
     }
 
@@ -383,7 +387,9 @@ window.__ModuleLoader__.load({
   --dy-border2: var(--dsw-alias-border-l2, #cfd9e8);
   --dy-text: var(--dsw-alias-label-primary, #17233a);
   --dy-muted: var(--dsw-alias-label-secondary, #718097);
-  --dy-brand: var(--dsw-alias-brand-primary, #3d6ff2);
+  /* Dayu brand blue is intentionally fixed: DSH's brand-primary token is
+     black in the light theme, which made the panel look monochrome. */
+  --dy-brand: #3d6ff2;
   --dy-brand-soft: color-mix(in srgb, var(--dy-brand) 9%, transparent);
   --dy-brand-line: color-mix(in srgb, var(--dy-brand) 28%, transparent);
   --dy-success: var(--dsw-alias-state-success-primary, #2f9d70);
