@@ -28,12 +28,12 @@
 
 ## 3. 数据流与缓存
 
-- 初次打开面板时，Host 并行检索 utility 与 game 两列，结果合并后由前端分类。
+- 初次打开面板时，Host 并行检索 utility（1 次搜索）与 game（2 次搜索）两列，结果合并后由前端评分分类。
 - 三层缓存：内存 `cache` / `allCache` → `%TEMP%\dsh-github-discover-cache.json` → stale-while-revalidate。
 - 星数快照：`%TEMP%\dsh-github-discover-stars.json`。
 - 体检结果：进程内 `audits`，6 小时或仓库 push 变化后重扫。
 - AI 解读：进程内 `interpretations`，按仓库 + 体检时间 + 语言缓存，最多 80 条。
-- 限流：未登录 GitHub 搜索约 10 次/分钟；核心 API 60 次/小时。撞限流返回 `rateLimited + resetAt`。
+- 限流：未登录 GitHub 搜索约 10 次/分钟；核心 API 60 次/小时。撞限流后短期短路匿名搜索，并把 `rateLimited + resetAt` 返回前端。刷新按钮使用缓存优先模式，不强制消耗额度；界面有旧数据时只显示轻量限流提示。
 - 打开面板不体检、不调用模型。只有用户点击才发生源码下载或模型请求。
 
 ## 4. 改动的标准流程
@@ -55,6 +55,7 @@
 ## 5. 设计决策
 
 - **品牌蓝固定为 `#3d6ff2`**：DSH 浅色主题的 `--dsw-alias-brand-primary` 实际是黑色，直接继承会让面板变成黑白；大鱼管家保留自己的蓝色品牌。
+- **分类是评分式启发**：`categorize()` 对 name/topics/description 加权评分，先清掉 dsh/deepseek/harness/plugin 这类通用词，再比较 model/ui/make/dev 得分。不要退回单条正则顺序，否则几乎所有仓库都会被 `deepseek` 吸进模型类。
 - **右侧决策面板**：选中卡片后原地查看，不离开列表，不打开新页面。
 - **不自动体检**：打开面板零下载、零模型调用。用户点「开始本地体检」才扫描。
 - **不用红黄绿灯做安全承诺**：显示真实能力和检查明细，使用「30 秒结论」表达。
@@ -115,7 +116,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File <repo-root>/publish-now.ps1 
 ## 9. 待办候选
 
 - 体检只抓 3 个关键文件，缩短大仓库等待时间。
-- 冷启动检索从 6 次降到 4 次。
-- 分类标签准确率微调（改 `categorize()` 正则）。
+- 冷启动检索已降到 3 次（utility 1 + game 2）。
+- 分类标签准确率微调（改 `CATEGORY_RULES` 的权重）。
 - 体检结果落盘。
 - 已安装插件升级检查和管理入口。

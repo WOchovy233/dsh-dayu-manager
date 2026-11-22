@@ -49,6 +49,8 @@ const SEARCH_LIMIT = 30
 /** How long the flat list and search results are reused. */
 const ALL_TTL_MS = 10 * 60_000
 const SEARCH_TIMEOUT_MS = 25_000
+/** Until this timestamp, anonymous search calls short-circuit instead of burning quota. */
+let searchBlockedUntil = 0
 const META_TIMEOUT_MS = 10_000
 const SNAPSHOT_FILE = join(tmpdir(), 'dsh-github-discover-stars.json')
 /** Columns and the flat list survive a restart here, so the panel opens without waiting. */
@@ -61,8 +63,8 @@ const DISCOVERY_CACHE_FILE = join(tmpdir(), 'dsh-github-discover-cache.json')
  * those plugins describe themselves with.
  */
 const COLUMNS = {
-  game: { queries: ['dsh game', 'dsh 游戏', 'dsh game development'] },
-  utility: { queries: ['dsh- in:name', 'dsh 插件'] },
+  game: { queries: ['dsh game', 'dsh 游戏'] },
+  utility: { queries: ['dsh in:name,description'] },
   emerging: { queries: [] },
 }
 
@@ -177,6 +179,14 @@ function toCard(item) {
  * @returns the cards and GitHub's total count.
  */
 async function githubSearch(query, options) {
+  const anonymous = options.token === undefined || options.token === ''
+  if (anonymous && Date.now() < searchBlockedUntil) {
+    const blocked = new Error('GitHub search (rate limited)')
+    blocked.status = 403
+    blocked.rateLimited = true
+    blocked.resetAt = searchBlockedUntil
+    throw blocked
+  }
   const url = 'https://api.github.com/search/repositories'
     + `?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=${String(options.perPage ?? COLUMN_LIMIT)}`
     + (options.page !== undefined ? `&page=${String(options.page)}` : '')
@@ -189,10 +199,13 @@ async function githubSearch(query, options) {
     const error = new Error(`GitHub search ${response.status}${response.status === 403 || response.status === 429 ? ' (rate limited)' : ''}`)
     error.status = response.status
     error.rateLimited = response.status === 403 || response.status === 429
-    error.resetAt = Number(response.headers.get('x-ratelimit-reset') ?? 0) * 1000
+    const resetAt = Number(response.headers.get('x-ratelimit-reset') ?? 0) * 1000
+    error.resetAt = resetAt > Date.now() ? resetAt : Date.now() + 60_000
     error.body = body.slice(0, 300)
+    if (anonymous && error.rateLimited) searchBlockedUntil = Math.max(searchBlockedUntil, error.resetAt)
     throw error
   }
+  if (!anonymous) searchBlockedUntil = 0
   const payload = await response.json()
   return {
     items: Array.isArray(payload.items) ? payload.items.map(toCard).filter(item => item.fullName !== '') : [],

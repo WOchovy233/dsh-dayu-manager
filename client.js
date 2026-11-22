@@ -61,7 +61,13 @@ window.__ModuleLoader__.load({
       'empty.title': '没有找到匹配的插件',
       'empty.hint': '换个关键词，或刷新 GitHub 检索。',
       'error.title': '检索失败',
+      'error.cached': '显示缓存结果：{message}',
       'rate.hint': 'GitHub 检索频率已用完，请稍后重试或填写令牌。',
+      'rate.title': 'GitHub 暂时限流',
+      'rate.cached': 'GitHub 检索额度暂时用完，继续显示缓存结果。',
+      'rate.wait': 'GitHub 检索额度已用完，{s} 秒后可重试。',
+      'rate.token': '填写 GitHub 令牌可提高检索额度。',
+      'action.rateWait': '限流 {s}s',
       'detail.badgeLocal': '本地体检 · 0 Token',
       'detail.badgeBundle': '社区插件',
       'detail.descriptionFallback': '这个仓库还没有填写简介。',
@@ -170,7 +176,13 @@ window.__ModuleLoader__.load({
       'empty.title': 'No matching plugins',
       'empty.hint': 'Try another keyword or refresh the GitHub search.',
       'error.title': 'Search failed',
+      'error.cached': 'Showing cached results: {message}',
       'rate.hint': 'GitHub search limit reached. Try again later or add a token.',
+      'rate.title': 'GitHub temporarily rate-limited',
+      'rate.cached': 'GitHub search quota is temporarily exhausted; showing cached results.',
+      'rate.wait': 'GitHub search quota is exhausted. Retry in {s}s.',
+      'rate.token': 'Add a GitHub token to raise the search quota.',
+      'action.rateWait': 'Wait {s}s',
       'detail.badgeLocal': 'Local audit · 0 Token',
       'detail.badgeBundle': 'Community plugin',
       'detail.descriptionFallback': 'This repository has no description yet.',
@@ -276,13 +288,73 @@ window.__ModuleLoader__.load({
       return String(value ?? '').toLowerCase().replace(/^@[^/]+\//, '').replace(/[^a-z0-9]+/g, '')
     }
 
+    const CATEGORY_RULES = {
+      model: [
+        ['model', 5], ['models', 5], ['llm', 5], ['openai', 4], ['claude', 4], ['gemini', 4],
+        ['provider', 4], ['api key', 4], ['apikey', 4], ['额度', 4], ['quota', 3], ['token', 2],
+        ['tokens', 2], ['cost', 3], ['模型', 4], ['推理', 3], ['vision', 3], ['多模态', 3],
+        ['embedding', 3], ['router', 2], ['routing', 2],
+      ],
+      ui: [
+        ['ui', 1], ['主题', 5], ['皮肤', 5], ['theme', 5], ['skin', 5], ['layout', 3],
+        ['侧边栏', 5], ['sidebar', 5], ['界面', 2], ['外观', 3], ['样式', 3],
+        ['启动界面', 5], ['启动动画', 5], ['canvas', 2], ['画布', 3], ['visual', 2],
+      ],
+      make: [
+        ['image', 4], ['images', 4], ['图像', 4], ['video', 4], ['videos', 4], ['视频', 4],
+        ['audio', 4], ['音频', 4], ['novel', 4], ['小说', 4], ['writing', 4], ['写作', 4],
+        ['design', 4], ['设计', 3], ['office', 4], ['文档', 3], ['ppt', 4], ['画布', 3],
+        ['canvas', 3], ['创作', 4], ['生成', 2], ['内容', 2], ['媒体', 3], ['工作台', 2],
+        ['b站', 3], ['bilibili', 3],
+      ],
+      dev: [
+        ['developer', 5], ['developer tools', 5], ['开发工具', 5], ['terminal', 4], ['终端', 4],
+        ['code', 3], ['代码', 3], ['debug', 4], ['调试', 4], ['search', 3], ['搜索', 3],
+        ['file', 3], ['files', 3], ['文件', 3], ['memory', 5], ['记忆', 5], ['context', 3],
+        ['上下文', 3], ['database', 4], ['数据库', 4], ['api', 2], ['cli', 4], ['toolkit', 4],
+        ['工具', 2], ['自动化', 3], ['automation', 3], ['workflow', 3], ['工作流', 3],
+        ['agent', 2], ['agents', 2], ['智能体', 2], ['mcp', 4], ['git', 4], ['computer use', 3],
+        ['电脑操控', 3], ['launcher', 3], ['启动器', 3], ['manager', 2], ['管理', 2],
+        ['radar', 4], ['insight', 3], ['cost', 3], ['web', 1],
+      ],
+    }
+
+    function categoryHasWord(text, word) {
+      if (/^[a-z0-9][a-z0-9 .+#_-]*$/i.test(word)) {
+        const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+')
+        return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, 'i').test(text)
+      }
+      return text.includes(word)
+    }
+
+    /**
+     * Classify a repository without letting the ubiquitous DSH branding turn
+     * every card into a model plugin. The old order-based regex gave `deepseek`
+     * and `model` far too much weight; scoring keeps developer tools visible.
+     */
     function categorize(item) {
-      const text = `${item.name} ${item.topics.join(' ')} ${item.description}`.toLowerCase()
-      if (/模型|model|llm|token|额度|provider|openai|claude|gemini|deepseek/.test(text)) return 'model'
-      if (/界面|主题|皮肤|ui|theme|skin|layout|样式|外观/.test(text)) return 'ui'
-      if (/创作|写作|绘画|图像|图片|音频|视频|音乐|翻译|markdown|canvas|image|video|audio|writing|design/.test(text)) return 'make'
-      if (/工具|开发|终端|代码|调试|搜索|文件|记忆|数据库|api|cli|dev|tool|code|terminal|search|memory|database/.test(text)) return 'dev'
-      return 'other'
+      const name = String(item.name ?? '').toLowerCase().replace(/^dsh[-_]?/, '')
+      const topics = (item.topics || []).join(' ').toLowerCase()
+      const description = String(item.description ?? '').toLowerCase()
+      const clean = value => value.replace(/\b(dsh|deepseek|harness|cordis|plugin|plugins)\b/g, ' ')
+      const nameText = clean(name)
+      const topicText = clean(topics)
+      const descText = clean(description)
+      let best = 'other'
+      let bestScore = 0
+      for (const [category, words] of Object.entries(CATEGORY_RULES)) {
+        let score = 0
+        for (const [word, weight] of words) {
+          if (categoryHasWord(nameText, word)) score += weight * 1.6
+          if (categoryHasWord(topicText, word)) score += weight * 1.2
+          if (categoryHasWord(descText, word)) score += weight
+        }
+        if (score > bestScore) {
+          best = category
+          bestScore = score
+        }
+      }
+      return best
     }
 
     function initials(name) {
@@ -485,6 +557,11 @@ window.__ModuleLoader__.load({
 .dy-state strong { color:var(--dy-text); font-size:13px; font-weight:600; }
 .dy-error { margin:10px 0; padding:10px 12px; border-radius:9px; border:1px solid color-mix(in srgb, var(--dy-danger) 35%, var(--dy-border)); background:var(--dy-layer); font-size:11.5px; color:var(--dy-muted); }
 .dy-error strong { color:var(--dy-danger); font-weight:600; }
+.dy-inlineNotice { display:flex; align-items:center; gap:8px; margin:8px 0 2px; padding:8px 10px; border-radius:9px;
+  border:1px solid color-mix(in srgb, var(--dy-warn) 30%, var(--dy-border)); background:color-mix(in srgb, var(--dy-warn) 6%, var(--dy-layer));
+  color:var(--dy-warn); font-size:10.5px; }
+.dy-inlineNotice span { flex:1; min-width:0; line-height:1.45; }
+.dy-inlineNotice .dy-btn { flex:none; height:27px; border-color:color-mix(in srgb, var(--dy-warn) 28%, var(--dy-border)); background:var(--dy-layer); color:var(--dy-text); }
 ` 
 
     const CSS_DETAIL = `
@@ -626,12 +703,12 @@ window.__ModuleLoader__.load({
         const language = String(document.documentElement.lang ?? '').toLowerCase().startsWith('en') ? 'en' : 'zh'
 
         const [columns, setColumns] = useState({
-          utility: { status: 'loading', items: [], error: '', rateLimited: false },
-          game: { status: 'loading', items: [], error: '', rateLimited: false },
+          utility: { status: 'loading', items: [], error: '', rateLimited: false, resetAt: 0 },
+          game: { status: 'loading', items: [], error: '', rateLimited: false, resetAt: 0 },
         })
         const [installed, setInstalled] = useState([])
         const [query, setQuery] = useState('')
-        const [search, setSearch] = useState({ status: 'idle', items: [], error: '' })
+        const [search, setSearch] = useState({ status: 'idle', items: [], error: '', rateLimited: false, resetAt: 0 })
         const [searchNonce, setSearchNonce] = useState(0)
         const [category, setCategory] = useState('all')
         const [pageState, setPageState] = useState(1)
@@ -643,6 +720,7 @@ window.__ModuleLoader__.load({
         const [aiState, setAiState] = useState({})
         const [confirm, setConfirm] = useState(null)
         const [installing, setInstalling] = useState({})
+        const [clock, setClock] = useState(() => Date.now())
         const searchSeq = useRef(0)
 
         const loadInstalled = useCallback(async () => {
@@ -673,6 +751,7 @@ window.__ModuleLoader__.load({
                 items: Array.isArray(body.items) ? body.items : [],
                 error: String(body.error ?? ''),
                 rateLimited: body.rateLimited === true,
+                resetAt: Number(body.resetAt ?? 0),
               },
             }))
           } catch (error) {
@@ -682,6 +761,8 @@ window.__ModuleLoader__.load({
                 ...previous[name],
                 status: 'ready',
                 error: String(error?.message ?? error),
+                rateLimited: false,
+                resetAt: 0,
               },
             }))
           }
@@ -697,10 +778,10 @@ window.__ModuleLoader__.load({
           const text = query.trim()
           if (text === '') {
             searchSeq.current += 1
-            setSearch({ status: 'idle', items: [], error: '' })
+            setSearch({ status: 'idle', items: [], error: '', rateLimited: false, resetAt: 0 })
             return undefined
           }
-          setSearch(previous => ({ status: 'loading', items: previous.items, error: '' }))
+          setSearch(previous => ({ ...previous, status: 'loading', error: '' }))
           const timer = window.setTimeout(() => {
             const sequence = searchSeq.current + 1
             searchSeq.current = sequence
@@ -711,14 +792,35 @@ window.__ModuleLoader__.load({
                 status: 'ready',
                 items: Array.isArray(body.items) ? body.items : [],
                 error: body.ok === false ? String(body.error ?? body.message ?? '') : '',
+                rateLimited: body.rateLimited === true,
+                resetAt: Number(body.resetAt ?? 0),
               })
             }).catch(error => {
               if (searchSeq.current !== sequence) return
-              setSearch({ status: 'ready', items: [], error: String(error?.message ?? error) })
+              setSearch({ status: 'ready', items: [], error: String(error?.message ?? error), rateLimited: false, resetAt: 0 })
             })
           }, 380)
           return () => { window.clearTimeout(timer) }
         }, [api, query, searchNonce])
+
+        const blockedUntil = Math.max(
+          Number(columns.utility.resetAt ?? 0),
+          Number(columns.game.resetAt ?? 0),
+          Number(search.resetAt ?? 0),
+        )
+        const rateSeconds = Math.max(0, Math.ceil((blockedUntil - clock) / 1000))
+
+        useEffect(() => {
+          if (blockedUntil <= Date.now()) return undefined
+          let timer
+          const tick = () => {
+            const now = Date.now()
+            setClock(now)
+            if (now >= blockedUntil) window.clearInterval(timer)
+          }
+          timer = window.setInterval(tick, 1000)
+          return () => { window.clearInterval(timer) }
+        }, [blockedUntil])
 
         const allItems = useMemo(() => {
           const seen = new Set()
@@ -900,20 +1002,40 @@ window.__ModuleLoader__.load({
           const searchFailed = query.trim() !== '' && search.error !== ''
           const failed = [columns.utility, columns.game].find(column => column.error !== '')
           if (!searchFailed && failed === undefined) return null
-          const message = searchFailed ? search.error : failed.error
+          const active = searchFailed ? search : failed
+          const message = String(active.error ?? '')
+          const cachedCount = searchFailed
+            ? source.length
+            : columns.utility.items.length + columns.game.items.length
+          if (cachedCount > 0) {
+            return h('div', { className: 'dy-inlineNotice', role: 'status' },
+              h(Icon, { name: 'alert', size: 14 }),
+              h('span', null, active.rateLimited === true
+                ? `${t('rate.cached')}${rateSeconds > 0 ? ` ${t('rate.wait', { s: rateSeconds })}` : ''}`
+                : t('error.cached', { message })),
+              active.rateLimited === true
+                ? h('button', { type: 'button', className: 'dy-btn small', onClick: () => { setTokenOpen(true) } }, t('action.token'))
+                : null)
+          }
           return h('div', { className: 'dy-error', role: 'status' },
-            h('strong', null, t('error.title')),
+            h('strong', null, active.rateLimited === true ? t('rate.title') : t('error.title')),
             ` ${message}`,
-            failed?.rateLimited === true ? h('div', null, t('rate.hint')) : null,
+            active.rateLimited === true
+              ? h('div', null, rateSeconds > 0 ? t('rate.wait', { s: rateSeconds }) : t('rate.hint'), ' ', t('rate.token'))
+              : null,
             h('div', { style: { marginTop: '7px' } },
               h('button', {
-                type: 'button', className: 'dy-btn small',
+                type: 'button', className: 'dy-btn small', disabled: rateSeconds > 0,
                 onClick: () => {
                   void loadColumn('utility', true)
                   void loadColumn('game', true)
                   if (query.trim() !== '') setSearchNonce(value => value + 1)
                 },
-              }, t('action.retry'))))
+              }, rateSeconds > 0 ? t('action.rateWait', { s: rateSeconds }) : t('action.retry')),
+              h('button', {
+                type: 'button', className: 'dy-btn small ghost',
+                onClick: () => { setTokenOpen(true) },
+              }, t('action.token'))))
         }
 
         const renderDetail = () => {
@@ -1140,13 +1262,17 @@ window.__ModuleLoader__.load({
                 onClick: () => { setTokenOpen(value => !value) },
               }, h(Icon, { name: 'lock', size: 14 }), t('action.token')),
               h('button', {
-                type: 'button', className: 'dy-btn primary',
+                type: 'button', className: 'dy-btn primary', disabled: rateSeconds > 0,
                 onClick: () => {
-                  void loadColumn('utility', true)
-                  void loadColumn('game', true)
+                  // A refresh is cache-aware: it never spends GitHub quota just
+                  // because the button was pressed. A stale cache revalidates in
+                  // the background; the visible data stays in place.
+                  void loadColumn('utility', false)
+                  void loadColumn('game', false)
                   if (query.trim() !== '') setSearchNonce(value => value + 1)
                 },
-              }, h(Icon, { name: 'refresh', size: 14 }), refreshing ? t('action.refreshing') : t('action.refresh')))),
+              }, h(Icon, { name: 'refresh', size: 14 }),
+              rateSeconds > 0 ? t('action.rateWait', { s: rateSeconds }) : refreshing ? t('action.refreshing') : t('action.refresh')))),
           tokenOpen
             ? h('div', { className: 'dy-tokenRow' },
               h('input', {
@@ -1155,7 +1281,14 @@ window.__ModuleLoader__.load({
               }),
               h('button', {
                 type: 'button', className: 'dy-btn small',
-                onClick: () => { api.writeToken(tokenDraft.trim()); setTokenOpen(false) },
+                onClick: () => {
+                  api.writeToken(tokenDraft.trim())
+                  setTokenOpen(false)
+                  setClock(Date.now())
+                  void loadColumn('utility', true)
+                  void loadColumn('game', true)
+                  if (query.trim() !== '') setSearchNonce(value => value + 1)
+                },
               }, t('action.save')),
               h('span', { className: 'dy-tokenHint' }, t('token.hint')))
             : null,
