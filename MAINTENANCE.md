@@ -21,9 +21,9 @@
 
 | 文件 | 职责 |
 |---|---|
-| `index.js` | Host 半边。HTTP 路由 `/api/dsh-github-discover/*`：`list`、`installed`、`inspect`、`install`、`audit`、`interpret`、`all`、`search`。含内存 + 磁盘缓存、限流处理和按需 AI 解读。 |
+| `index.js` | Host 半边。HTTP 路由 `/api/dsh-github-discover/*`：`list`、`installed`、`inspect`、`install`、`audit`、`interpret`、`all`、`search`、`version`、`update`。含内存 + 磁盘缓存、限流处理、按需 AI 解读与按需更新检查。 |
 | `audit.js` | 体检引擎：下载 codeload 归档 → gunzip + tar 解析 → 静态扫描（模型端点、登录、写文件、子进程、混淆、fork、npm 同名包）→ 输出结构化事实与检查项。不依赖 GitHub API 额度。 |
-| `client.js` | 浏览器半边的全部 UI：字典、CSS、精选列表、分类、搜索、右侧决策面板、体检展示、AI 解读、安装确认。 |
+| `client.js` | 浏览器半边的全部 UI：字典、CSS、精选列表、分类、搜索、右侧决策面板、体检展示、AI 解读、安装确认、版本按钮。 |
 | `locale/zh.json`、`locale/en.json` | 「插件」页显示的标题与描述（`meta.detail` 指向 `docs/DETAIL.md`）。 |
 | `docs/DETAIL.md`、`docs/preview.png` | 详情页说明与界面预览。 |
 | `README.md`、`LICENSE` | GitHub 首页与 MIT 许可证。 |
@@ -38,6 +38,9 @@
 - 体检结果：进程内 `audits`，6 小时或仓库 push 变化后重扫。
 - AI 解读：进程内 `interpretations`，按仓库 + 体检时间 + 语言缓存，最多 80 条。
 - 限流：未登录 GitHub 搜索约 10 次/分钟；核心 API 60 次/小时。撞限流后短期短路匿名搜索，并把 `rateLimited + resetAt` 返回前端。刷新按钮使用缓存优先模式，不强制消耗额度；界面有旧数据时只显示轻量限流提示。
+- 版本与更新：`/version` 只读本地 `package.json`，不联网；`/update` 只在用户点击顶部版本按钮时请求最新版本，不做轮询、不在打开面板时检查。
+- `/update` 的源顺序：GitHub API 与 jsDelivr 并行竞速，失败后回退到 GitHub Release 跳转、Fastly jsDelivr、raw.githubusercontent、githack。Token 只发给 `api.github.com`，绝不发给镜像站点。
+- 版本号有三处：`package.json`、`index.js` 的 `PLUGIN_VERSION`、`client.js` 的 `CLIENT_VERSION`。DSH loader 的入口 URL 可能不在包目录，后两者是兜底；发布脚本会校验三处一致，改版本时三处一起改。
 - 打开面板不体检、不调用模型。只有用户点击才发生源码下载或模型请求。
 
 ## 4. 改动的标准流程
@@ -98,14 +101,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File <repo-root>/publish-now.ps1 
 - **GitHub 搜索质量不稳**：`isDshRelated()` 过滤名字碰瓷项目，别删。
 - **端口每次重启都会变**：命令行验证不要写死 GUI URL。
 - **AI 依赖当前默认模型**：`agentDefaultModel.currentSelection()` 必须有 provider/model；自定义中转不可用时，解读会失败但本地体检不受影响。
-- **发布脚本使用 Windows DPAPI 保存 token**：token 文件在当前 Windows 用户下可解密，别复制到别的机器或提交到仓库。
-- **首次发布需要 classic PAT 且勾选 repo**：之后 `publish-now.cmd` 可一键更新。
+- **每次发布都手动粘贴 Token**：Token 只在当前 PowerShell 进程内存中使用，不写盘、不读取旧凭证。旧版 `%USERPROFILE%\.dsh-dayu-manager.cred` 已废弃，建议删除。
+- **发布 Token 必须有写权限**：classic PAT 勾选 `repo`；fine-grained 选本仓库并给 `Contents: Read and write`。脚本会在第一次写 blob 前用 `GET /repos` 的 `permissions.push` 预检，写入 401/403 会附带权限提示。
+- **Token 只有读权限时**：`/user` 可能成功，但 `POST /git/blobs` 会 401。看到这种错误先检查 Token 的 writable 权限，不是脚本问题。
 
 ## 8. 发布
 
 ```powershell
-# 首次：双击 publish-now.cmd，按提示粘贴一次 token
-# 之后：继续双击 publish-now.cmd 即可更新代码、tag 和 release
+# 每次：双击 publish-now.cmd，按提示粘贴 token（输入隐藏，不保存）
+# 然后脚本更新代码、tag 和 release
 ```
 
 发布脚本会：

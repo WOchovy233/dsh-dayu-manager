@@ -2,7 +2,10 @@
 
 ## 修复
 
-- 版本号提升到 `1.1.0`，保留已发布的 `v1.0.4`，用新 tag 发布本轮分类与限流修复。
+- 面板顶部新增版本按钮：默认只显示当前版本，只有点击时才检查 GitHub 最新 Release；有更新时显示新版本号和 Release 链接。
+- 修复版本显示为「版本未知」：DSH loader 的入口 URL 可能不挨着 `package.json`，Host 与客户端都加入内置版本号兜底，发布脚本校验版本一致。
+- 检查更新改为多源：GitHub API → GitHub Release 跳转 → jsDelivr / Fastly / raw / githack 的 package.json，API 不可达或仓库暂无 Release 时仍能检查。
+- 版本号保持 `1.1.0`；发布脚本会创建或更新 `v1.1.0` tag 与 GitHub Release。
 - 重写分类评分规则，不再让 `deepseek` / `model` 等通用词把几乎所有插件归进「模型能力」。
 - 「开发工具」现在能正确识别终端、搜索、文件、记忆、上下文、MCP、工作流、Agent 等插件。
 - 当前缓存样本的分类分布：开发工具 50 / 模型能力 15 / 内容创作 9 / 其他 8 / 界面美化 6。

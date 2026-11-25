@@ -15,6 +15,9 @@ window.__ModuleLoader__.load({
 
     const NS = 'github.discover'
     const PANEL_ID = 'github-discover'
+    // Keep in sync with package.json. The Host route is the source of truth, but
+    // this keeps the chip readable if the Host has not been reloaded yet.
+    const CLIENT_VERSION = '1.1.0'
     const ENDPOINT = 'api/dsh-github-discover'
     const TOKEN_KEY = 'dsh-github-discover:token'
     const PAGE_SIZE = 6
@@ -33,6 +36,18 @@ window.__ModuleLoader__.load({
       'action.prev': '上一页',
       'action.next': '下一页',
       'action.github': '在 GitHub 打开',
+      'version.check': '检查更新',
+      'version.current': '当前版本 {version}',
+      'version.hint': '当前版本 {version}，点击检查更新',
+      'version.checking': '检查中…',
+      'version.latest': '已是最新',
+      'version.available': '可更新到 v{version}',
+      'version.error': '检查失败',
+      'version.errorDetail': '检查更新失败：{message}。请检查网络或代理后重试。',
+      'version.rateLimited': 'GitHub 检查更新频率已用完，约 {s} 秒后再试。',
+      'version.staleHost': '检查更新失败：{message}。请重启 DSH，或禁用/重新启用插件行后再试；若仍失败，请确认仓库公开且有 Release。',
+      'version.unknown': '版本未知',
+      'version.open': '查看新版本',
       'search.placeholder': '搜索插件、作者或能力',
       'token.placeholder': '粘贴 GitHub 令牌（可选，只存本机）',
       'token.hint': '令牌只用于提高 GitHub 检索频率，不会上传到别处。',
@@ -148,6 +163,18 @@ window.__ModuleLoader__.load({
       'action.prev': 'Prev',
       'action.next': 'Next',
       'action.github': 'Open on GitHub',
+      'version.check': 'Check for updates',
+      'version.current': 'Current version {version}',
+      'version.hint': 'Current version {version}. Click to check for updates.',
+      'version.checking': 'Checking…',
+      'version.latest': 'Up to date',
+      'version.available': 'Update available: v{version}',
+      'version.error': 'Check failed',
+      'version.errorDetail': 'Update check failed: {message}. Check your network or proxy and try again.',
+      'version.rateLimited': 'GitHub update check is rate limited. Try again in about {s} seconds.',
+      'version.staleHost': 'Update check failed: {message}. Restart DSH, or disable and re-enable the plugin row, then try again. If it still fails, confirm the repository is public and has a Release.',
+      'version.unknown': 'Version unknown',
+      'version.open': 'View release',
       'search.placeholder': 'Search plugins, authors or capabilities',
       'token.placeholder': 'Paste a GitHub token (optional, stored locally)',
       'token.hint': 'Only used to raise GitHub search limits; it is never uploaded elsewhere.',
@@ -416,6 +443,7 @@ window.__ModuleLoader__.load({
       let children
       if (props.name === 'search') children = [h('circle', { cx: 10.5, cy: 10.5, r: 6.5 }), p('M15.4 15.4 21 21')]
       else if (props.name === 'refresh') children = [p('M20 7v5h-5'), p('M4 17v-5h5'), p('M6.1 9a7 7 0 0 1 11.3-2.2L20 12'), p('M4 12l2.6 5.2A7 7 0 0 0 17.9 15')]
+      else if (props.name === 'up') children = [p('M12 19V5'), p('m6 11 6-6 6 6')]
       else if (props.name === 'spark') children = [h('path', { d: 'M12 2.8 13.7 8l5.2 1.7-5.2 1.7L12 16.6l-1.7-5.2L5.1 9.7 10.3 8 12 2.8Z', fill: 'currentColor', stroke: 'none' }), h('circle', { cx: 19, cy: 18, r: 1.4, fill: 'currentColor', stroke: 'none' })]
       else if (props.name === 'shield') children = [p('M12 2.5 20 5.7v5.4c0 4.7-3.3 8.3-8 10.4-4.7-2.1-8-5.7-8-10.4V5.7L12 2.5Z'), p('m8.2 12 2.5 2.5 5.2-5.2')]
       else if (props.name === 'globe') children = [h('circle', { cx: 12, cy: 12, r: 8.5 }), p('M3.8 12h16.4'), p('M12 3.5c2.3 2.4 3.5 5.2 3.5 8.5S14.3 18.1 12 20.5c-2.3-2.4-3.5-5.2-3.5-8.5S9.7 5.9 12 3.5Z')]
@@ -495,6 +523,19 @@ window.__ModuleLoader__.load({
 .dy-btn.primary:hover { opacity:.9; }
 .dy-btn.ghost { border-color:transparent; background:transparent; color:var(--dy-muted); }
 .dy-btn.ghost:hover { background:var(--dy-overlay); color:var(--dy-text); }
+.dy-version { display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 10px;
+  border:1px solid var(--dy-brand-line); border-radius:999px; background:var(--dy-brand-soft);
+  color:var(--dy-brand); font:inherit; font-size:11.5px; font-weight:600; cursor:pointer; white-space:nowrap;
+  font-variant-numeric:tabular-nums; transition:background .15s, border-color .15s, color .15s, opacity .15s; }
+.dy-version:hover { background:color-mix(in srgb, var(--dy-brand) 15%, transparent); }
+.dy-version:disabled { cursor:default; opacity:.7; }
+.dy-version.update { border-color:transparent; background:var(--dy-brand); color:#fff; }
+.dy-version.update:hover { background:var(--dy-brand); opacity:.9; }
+.dy-version.latest { border-color:color-mix(in srgb, var(--dy-success) 30%, var(--dy-border)); background:color-mix(in srgb, var(--dy-success) 8%, transparent); color:var(--dy-success); }
+.dy-version.error { border-color:color-mix(in srgb, var(--dy-danger) 32%, var(--dy-border)); background:color-mix(in srgb, var(--dy-danger) 7%, transparent); color:var(--dy-danger); }
+.dy-version .dy-spinner { width:13px; height:13px; border-width:1.6px; }
+.dy-versionLink { font-size:11px; color:var(--dy-brand); text-decoration:none; white-space:nowrap; }
+.dy-versionLink:hover { text-decoration:underline; }
 .dy-btn.small { height:32px; border-radius:8px; padding:0 11px; font-size:11.5px; }
 .dy-tokenRow { flex:none; display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:10px clamp(20px,3vw,38px);
   border-bottom:1px solid var(--dy-border); background:var(--dy-layer); }
@@ -721,6 +762,7 @@ window.__ModuleLoader__.load({
         const [confirm, setConfirm] = useState(null)
         const [installing, setInstalling] = useState({})
         const [clock, setClock] = useState(() => Date.now())
+        const [versionState, setVersionState] = useState({ version: CLIENT_VERSION, status: 'idle', latest: '', url: '', error: '' })
         const searchSeq = useRef(0)
 
         const loadInstalled = useCallback(async () => {
@@ -731,6 +773,54 @@ window.__ModuleLoader__.load({
             setInstalled([])
           }
         }, [api])
+
+        const loadVersion = useCallback(async () => {
+          try {
+            const body = await api.version()
+            const hostVersion = String(body.version ?? '')
+            if (hostVersion !== '') setVersionState(previous => ({ ...previous, version: hostVersion }))
+          } catch {
+            // The embedded CLIENT_VERSION keeps the chip readable while the Host reloads.
+          }
+        }, [api])
+
+        const checkUpdate = useCallback(async () => {
+          setVersionState(previous => ({ ...previous, status: 'checking', error: '' }))
+          const fail = error => {
+            const message = String(error?.message ?? error)
+            setVersionState(previous => ({ ...previous, status: 'error', error: message }))
+            setNotice({
+              kind: 'error',
+              text: /404/.test(message)
+                ? t('version.staleHost', { message })
+                : t('version.errorDetail', { message }),
+            })
+          }
+          try {
+            const body = await api.checkUpdate()
+            if (body.ok === false) {
+              if (body.rateLimited === true) {
+                const resetAt = Number(body.resetAt ?? 0)
+                const seconds = resetAt > Date.now() ? Math.ceil((resetAt - Date.now()) / 1000) : 60
+                setVersionState(previous => ({ ...previous, status: 'error', error: String(body.message ?? 'rate limited') }))
+                setNotice({ kind: 'warn', text: t('version.rateLimited', { s: seconds }) })
+                return
+              }
+              throw new Error(String(body.message ?? 'Update check failed'))
+            }
+            const latest = String(body.latest ?? body.current ?? '')
+            setVersionState(previous => ({
+              ...previous,
+              version: String(body.current ?? '') || previous.version,
+              status: body.newer === true ? 'update' : 'latest',
+              latest,
+              url: String(body.url ?? ''),
+              error: '',
+            }))
+          } catch (error) {
+            fail(error)
+          }
+        }, [api, t])
 
         const loadColumn = useCallback(async (name, refresh) => {
           setColumns(previous => ({
@@ -773,6 +863,10 @@ window.__ModuleLoader__.load({
           void loadColumn('game', false)
           void loadInstalled()
         }, [loadColumn, loadInstalled])
+
+        useEffect(() => {
+          void loadVersion()
+        }, [loadVersion])
 
         useEffect(() => {
           const text = query.trim()
@@ -1211,6 +1305,29 @@ window.__ModuleLoader__.load({
           ? refreshing ? t('hint.updating') : t('section.hint')
           : search.status === 'loading' ? t('hint.searching') : ''
 
+        const versionText = versionState.version === '' ? t('version.unknown') : `v${versionState.version}`
+        const versionTone = versionState.status === 'update'
+          ? 'update'
+          : versionState.status === 'latest'
+            ? 'latest'
+            : versionState.status === 'error' ? 'error' : ''
+        const versionLabel = versionState.status === 'checking'
+          ? `${versionText} · ${t('version.checking')}`
+          : versionState.status === 'update'
+            ? `${versionText} → v${versionState.latest}`
+            : versionState.status === 'latest'
+              ? `${versionText} · ${t('version.latest')}`
+              : versionState.status === 'error'
+                ? `${versionText} · ${t('version.error')}`
+                : versionText
+        const versionTitle = versionState.status === 'update'
+          ? t('version.available', { version: versionState.latest })
+          : versionState.status === 'error'
+            ? `${t('version.current', { version: versionText })} · ${versionState.error}`
+            : versionState.status === 'idle'
+              ? t('version.hint', { version: versionText })
+              : t('version.current', { version: versionText })
+
         const body = h('div', { className: 'dy-body' },
           h('section', { className: 'dy-browser', 'aria-label': browserTitle },
             h('div', { className: 'dy-browserHead' },
@@ -1251,6 +1368,29 @@ window.__ModuleLoader__.load({
               h('h1', { className: 'dy-title' }, t('title')),
               h('p', { className: 'dy-sub' }, t('subtitle'))),
             h('div', { className: 'dy-tools' },
+              h('button', {
+                type: 'button',
+                className: ['dy-version', versionTone].filter(Boolean).join(' '),
+                title: versionTitle,
+                'aria-label': versionTitle,
+                disabled: versionState.status === 'checking',
+                onClick: () => { void checkUpdate() },
+              },
+                versionState.status === 'checking'
+                  ? h('span', { className: 'dy-spinner' })
+                  : h(Icon, {
+                    name: versionState.status === 'update' ? 'up'
+                      : versionState.status === 'latest' ? 'check'
+                        : versionState.status === 'error' ? 'alert' : 'refresh',
+                    size: 13,
+                  }),
+                h('span', null, versionLabel)),
+              versionState.status === 'update' && versionState.url !== ''
+                ? h('a', {
+                  className: 'dy-versionLink', href: versionState.url,
+                  target: '_blank', rel: 'noopener noreferrer',
+                }, t('version.open'))
+                : null,
               h('label', { className: 'dy-search' },
                 h(Icon, { name: 'search', size: 15 }),
                 h('input', {
@@ -1333,6 +1473,13 @@ window.__ModuleLoader__.load({
         },
         list: (column, refresh) => request('list', { method: 'GET' }, { column, refresh: refresh ? 1 : undefined }, true),
         installed: () => request('installed', { method: 'GET' }, {}),
+        version: () => request('version', { method: 'GET' }, {}),
+        checkUpdate: () => request('update', {
+          method: 'GET',
+          signal: typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function'
+            ? AbortSignal.timeout(30_000)
+            : undefined,
+        }, {}, true),
         search: query => request('search', { method: 'GET' }, { q: query }, true),
         inspect: repo => request('inspect', { method: 'GET' }, { repo }),
         audit: async (repo, branch, refresh) => {

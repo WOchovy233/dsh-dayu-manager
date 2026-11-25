@@ -22,6 +22,18 @@ import { auditRepository } from './audit.js'
 
 /** Same-origin mount point; the page resolves `api/dsh-github-discover/...` against its document base. */
 const BASE = '/api/dsh-github-discover'
+/** Public repository that publishes Dayu Manager releases. */
+const UPDATE_REPO = 'WOchovy233/dsh-dayu-manager'
+/**
+ * Keep in sync with package.json. The DSH loader may execute this module from an
+ * entry URL that does not sit next to package.json, so this is the fallback used
+ * to keep the version chip and update check working in that case.
+ */
+const PLUGIN_VERSION = '1.1.0'
+/** Per-source timeout for the user-initiated release check. */
+const UPDATE_SOURCE_TIMEOUT_MS = 5_000
+/** Total budget across release-check sources; keep below the client timeout. */
+const UPDATE_TOTAL_BUDGET_MS = 20_000
 /** How long a column's search results are reused before GitHub is asked again. */
 const CACHE_TTL_MS = 10 * 60_000
 /** Repositories a column keeps; the panel pages through them 20 at a time. */
@@ -147,6 +159,196 @@ function githubHeaders(token) {
   }
   if (token) headers.authorization = `Bearer ${token}`
   return headers
+}
+
+let packageVersionCache = ''
+let packageVersionSource = ''
+
+/**
+ * Read this package's version from package.json, falling back to the constant
+ * above when the loader's entry URL does not sit next to the package file.
+ * This is a local read, so opening the panel never spends GitHub quota.
+ * @returns the version.
+ */
+async function packageVersion() {
+  if (packageVersionCache !== '') return packageVersionCache
+  try {
+    const raw = await readFile(new URL('./package.json', import.meta.url), 'utf8')
+    const manifest = JSON.parse(raw)
+    if (manifest?.name === 'dsh-github-discover' && manifest?.version) {
+      packageVersionCache = String(manifest.version)
+      packageVersionSource = 'package.json'
+      return packageVersionCache
+    }
+  } catch {
+    /* Fall through to the embedded version. */
+  }
+  packageVersionCache = PLUGIN_VERSION
+  packageVersionSource = 'constant'
+  return packageVersionCache
+}
+
+/**
+ * Compare dotted versions without adding a dependency.
+ * @returns true when `latest` is newer than `current`.
+ */
+function isNewerVersion(latest, current) {
+  const parse = value => String(value ?? '').replace(/^v/i, '').split('.').map(part => Number.parseInt(part, 10) || 0)
+  const next = parse(latest)
+  const now = parse(current)
+  for (let index = 0; index < Math.max(next.length, now.length); index += 1) {
+    const left = next[index] ?? 0
+    const right = now[index] ?? 0
+    if (left !== right) return left > right
+  }
+  return false
+}
+
+/** Make an undici network failure readable; the bare message is only "fetch failed". */
+function describeFetchError(error) {
+  const message = String(error?.message ?? error)
+  const cause = error?.cause
+  const detail = String(cause?.code ?? cause?.message ?? '')
+  return detail === '' ? message : `${message} (${detail})`
+}
+
+function updateTimeout(ms) {
+  return typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function'
+    ? AbortSignal.timeout(ms)
+    : undefined
+}
+
+/**
+ * Fetch the latest version from several public sources. The GitHub API is the
+ * best source, but it is often unreachable from the desktop process; GitHub's
+ * release redirect and CDN mirrors keep the button useful in that case. Tokens
+ * are only sent to api.github.com, never to the mirrors.
+ * @param token - optional GitHub token from the panel.
+ */
+async function fetchLatestRelease(token) {
+  const base = `https://github.com/${UPDATE_REPO}`
+  const authenticated = githubHeaders(token)
+  const anonymous = githubHeaders('')
+  const packageSources = [
+    ['jsdelivr', `https://cdn.jsdelivr.net/gh/${UPDATE_REPO}@main/package.json`],
+    ['fastly-jsdelivr', `https://fastly.jsdelivr.net/gh/${UPDATE_REPO}@main/package.json`],
+    ['raw-github', `https://raw.githubusercontent.com/${UPDATE_REPO}/main/package.json`],
+    ['githack', `https://raw.githack.com/${UPDATE_REPO}/main/package.json`],
+  ]
+  const sources = [
+    {
+      name: 'github-api',
+      async run(ms) {
+        const call = headers => fetch(`https://api.github.com/repos/${UPDATE_REPO}/releases/latest`, {
+          headers,
+          signal: updateTimeout(ms),
+        })
+        let response = await call(authenticated)
+        if (response.status === 401 && token) response = await call(anonymous)
+        if (!response.ok) {
+          const error = new Error(`HTTP ${String(response.status)}`)
+          error.status = response.status
+          error.rateLimited = response.status === 403 || response.status === 429
+          const resetAt = Number(response.headers.get('x-ratelimit-reset') ?? 0) * 1000
+          error.resetAt = resetAt > Date.now() ? resetAt : Date.now() + 60_000
+          throw error
+        }
+        const release = await response.json()
+        const latest = String(release?.tag_name ?? '').replace(/^v/i, '')
+        if (latest === '') throw new Error('missing tag_name')
+        return {
+          latest,
+          url: String(release?.html_url ?? `${base}/releases/tag/v${latest}`),
+          publishedAt: String(release?.published_at ?? ''),
+          name: String(release?.name ?? ''),
+          source: 'github-api',
+        }
+      },
+    },
+    {
+      name: 'github-releases',
+      async run(ms) {
+        const response = await fetch(`${base}/releases/latest`, {
+          headers: anonymous,
+          redirect: 'manual',
+          signal: updateTimeout(ms),
+        })
+        const location = response.headers.get('location') ?? ''
+        const match = location.match(/\/releases\/tag\/([^/?#]+)/)
+        if (match === null) throw new Error(`HTTP ${String(response.status)}, no tag redirect`)
+        const latest = decodeURIComponent(match[1]).replace(/^v/i, '')
+        return {
+          latest,
+          url: location.startsWith('http') ? location : `${base}${location}`,
+          publishedAt: '',
+          name: '',
+          source: 'github-releases',
+        }
+      },
+    },
+    ...packageSources.map(([name, url]) => ({
+      name,
+      async run(ms) {
+        const response = await fetch(url, { headers: anonymous, signal: updateTimeout(ms) })
+        if (!response.ok) throw new Error(`HTTP ${String(response.status)}`)
+        const manifest = await response.json()
+        if (manifest?.name !== 'dsh-github-discover' || !manifest?.version) {
+          throw new Error('package.json is not Dayu Manager')
+        }
+        return {
+          latest: String(manifest.version).replace(/^v/i, ''),
+          url: `${base}/releases`,
+          publishedAt: '',
+          name: '',
+          source: name,
+        }
+      },
+    })),
+  ]
+
+  const failures = []
+  let resetAt = 0
+  const deadline = Date.now() + UPDATE_TOTAL_BUDGET_MS
+  const record = (source, error) => {
+    if (Number(error?.resetAt) > resetAt) resetAt = Number(error.resetAt)
+    failures.push(`${source.name}: ${describeFetchError(error)}`)
+  }
+  const firstSuccessful = async group => {
+    const attempts = group.map(source => source.run(Math.min(UPDATE_SOURCE_TIMEOUT_MS, deadline - Date.now())).then(
+      result => ({ result }),
+      error => Promise.reject({ source, error }),
+    ))
+    try {
+      const winner = await Promise.any(attempts)
+      return { result: winner.result }
+    } catch (aggregate) {
+      return { errors: Array.isArray(aggregate?.errors) ? aggregate.errors : [] }
+    }
+  }
+
+  // The API is authoritative, but jsDelivr is usually reachable when the API
+  // is not. Race them so a blocked API does not add seconds to every click.
+  const primary = [sources[0], sources[2]]
+  const first = await firstSuccessful(primary)
+  if (first?.result !== undefined) return first.result
+  if (first?.errors !== undefined) {
+    for (const entry of first.errors) record(entry.source, entry.error)
+    if (first.errors.length === 0) throw new Error('update check failed before any source ran')
+  }
+
+  for (const source of sources.filter(item => !primary.includes(item))) {
+    const remaining = deadline - Date.now()
+    if (remaining < 500) break
+    try {
+      return await source.run(Math.min(UPDATE_SOURCE_TIMEOUT_MS, remaining))
+    } catch (error) {
+      record(source, error)
+    }
+  }
+  const error = new Error(`all update sources failed (${failures.join(' | ')})`)
+  error.rateLimited = failures.some(failure => failure.includes('HTTP 403') || failure.includes('HTTP 429'))
+  error.resetAt = resetAt
+  throw error
 }
 
 /**
@@ -986,6 +1188,35 @@ async function respond(discovery, request, peer) {
   const header = request.headers.get('x-github-token')
   const token = (header && header.trim() !== '' ? header.trim() : '') || process.env.GITHUB_TOKEN || process.env.GH_TOKEN || ''
   try {
+    if (action === 'version' && request.method === 'GET') {
+      const version = await packageVersion()
+      return json({ ok: true, version, source: packageVersionSource, repo: UPDATE_REPO })
+    }
+    if (action === 'update' && request.method === 'GET') {
+      const current = await packageVersion()
+      try {
+        const release = await fetchLatestRelease(token)
+        const latest = String(release?.latest ?? '').replace(/^v/i, '') || current
+        return json({
+          ok: true,
+          current,
+          latest,
+          newer: isNewerVersion(latest, current),
+          url: String(release?.url ?? ''),
+          publishedAt: String(release?.publishedAt ?? ''),
+          name: String(release?.name ?? ''),
+          source: String(release?.source ?? ''),
+        })
+      } catch (error) {
+        return json({
+          ok: false,
+          current,
+          message: error?.rateLimited === true ? 'GitHub release check is rate limited' : String(error?.message ?? error),
+          rateLimited: error?.rateLimited === true,
+          resetAt: Number(error?.resetAt ?? 0),
+        })
+      }
+    }
     if (action === 'list' && request.method === 'GET') {
       const name = url.searchParams.get('column') ?? ''
       if (!Object.hasOwn(COLUMNS, name)) return json({ ok: false, message: '未知的分类' }, 400)
